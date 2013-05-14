@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:rich="http://richfaces.org/rich">
+	<h:head />
+	<f:view>
+		<h:body>
+		
+			<h:form>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="#{msg['cliente.nome']}" />
+					<h:inputText value="#{clienteController.filter.nomeLikeRight}" />
+					<h:commandButton value="#{msg['adicionar']}" action="#{clienteController.adicionar}" />
+					<h:commandButton value="#{msg['pesquisar']}" action="#{clienteController.pesquisar}" />
+				</h:panelGrid>
+			</h:form>
+
+			<h:form>
+				<rich:dataTable value="#{clienteController.list}" var="cliente">
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg['cliente.id']}" />
+						</f:facet>
+						<h:outputText value="#{cliente.id}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg['cliente.nome']}" />
+						</f:facet>
+						<h:outputText value="#{cliente.nome}" />
+					</rich:column>
+				</rich:dataTable>
+			</h:form>
+			
+		</h:body>
+	</f:view>	
+</html>

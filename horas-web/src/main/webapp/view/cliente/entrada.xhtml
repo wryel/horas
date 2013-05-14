@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich">
+	<f:view>
+	<h:head />
+		<h:body>
+			<f:metadata>
+				<f:event listener="#{clienteController.retrieveBeanFromFlashEvent}" type="preRenderView" />
+			</f:metadata>
+			<h:form>
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msg['cliente.nome']}" />
+					<h:inputText value="#{clienteController.bean.nome}" />
+				</h:panelGrid>
+				<h:commandButton action="#{clienteController.salvarAdicionar}" value="#{msg['adicionar']}" />
+			</h:form>
+		</h:body>
+	</f:view>
+</html>

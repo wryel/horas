@@ -1,0 +1,24 @@
+<faces-config 
+	version="2.1"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+						http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+	<application>
+	    <locale-config>
+	        <default-locale>pt_BR</default-locale>
+	    </locale-config>
+	    <resource-bundle>
+	        <base-name>ResourceMessages</base-name>
+	        <var>msg</var>
+	    </resource-bundle>
+	</application>
+	<converter>
+	    <converter-id>clienteConverter</converter-id>
+	    <converter-class>br.com.wryel.horas.converter.ClienteConverter</converter-class>
+	</converter>
+	<converter>
+	    <converter-id>projetoConverter</converter-id>
+	    <converter-class>br.com.wryel.horas.converter.ProjetoConverter</converter-class>
+	</converter>
+</faces-config>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich">
+	<f:view>
+	<h:head />
+		<h:body>
+			<h:form>
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msg['demanda.nome']}" />
+					<h:inputText value="#{demandaController.bean.nome}" />
+					
+					<h:outputText value="#{msg['cliente']}" />
+					<h:selectOneMenu value="#{clienteController.bean}" converter="clienteConverter">
+						<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
+						<f:selectItems value="#{comboController.clientes}" />
+						<f:ajax listener="#{demandaController.mudouClienteEvento}" event="change" render="projeto" execute="@this" />
+					</h:selectOneMenu>
+					
+					<h:outputText value="#{msg['projeto']}" />
+					<h:selectOneMenu value="#{demandaController.bean.projeto}" id="projeto" converter="projetoConverter">
+						<f:selectItems value="#{projetoController.listAsSelectItems}" />
+					</h:selectOneMenu>
+					
+				</h:panelGrid>
+				<h:commandButton action="#{demandaController.salvarAdicionar}" value="#{msg['adicionar']}" />
+			</h:form>
+		</h:body>
+	</f:view>
+</html>

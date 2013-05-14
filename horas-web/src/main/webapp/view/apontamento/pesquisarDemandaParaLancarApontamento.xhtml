@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:rich="http://richfaces.org/rich" 
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:composition template="/view/template/template.xhtml">
+		<ui:define name="body">
+			<rich:panel>
+			
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="#{msg['demanda.nome']}" />
+						<h:inputText value="#{demandaController.filter.nomeLikeRight}" />
+						<h:commandButton value="#{msg['adicionar']}" action="#{apontamentoController.adicionar}" />
+						<h:commandButton value="#{msg['pesquisar']}" action="#{apontamentoController.pesquisarDemandas}" />
+					</h:panelGrid>
+				</h:form>
+	
+				<h:form>
+					<rich:dataTable value="#{demandaController.list}" var="demanda">
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['demanda.id']}" />
+							</f:facet>
+							<h:outputText value="#{demanda.id}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['demanda.nome']}" />
+							</f:facet>
+							<h:outputText value="#{demanda.nome}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['cliente']}" />
+							</f:facet>
+							<h:outputText value="#{demanda.projeto.cliente.nome}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['projeto']}" />
+							</f:facet>
+							<h:outputText value="#{demanda.projeto.nome}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['apontamento.lancar']}" />
+							</f:facet>
+							<h:commandLink action="#{apontamentoController.visualizarApontamentos}">
+								<h:graphicImage value="/view/apontamento/imagem/lancar.png" />
+								<f:setPropertyActionListener target="#{demandaController.bean}" value="#{demanda}" />
+							</h:commandLink>
+						</rich:column>
+					</rich:dataTable>
+				</h:form>
+			
+			</rich:panel>
+		</ui:define>
+	</ui:composition>
+</html>
