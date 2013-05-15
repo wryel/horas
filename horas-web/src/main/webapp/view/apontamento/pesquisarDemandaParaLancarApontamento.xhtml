@@ -8,6 +8,9 @@
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="body">
 			<rich:panel>
+				<f:facet name="header">
+					<h:outputText value="#{msg['apontamento']}" />
+				</f:facet>
 			
 				<h:form>
 					<h:panelGrid columns="2">
