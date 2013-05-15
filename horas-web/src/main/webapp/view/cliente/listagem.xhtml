@@ -3,10 +3,10 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" 
-	xmlns:rich="http://richfaces.org/rich">
-	<h:head />
-	<f:view>
-		<h:body>
+	xmlns:rich="http://richfaces.org/rich" 
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:composition template="/view/template/template.xhtml">
+		<ui:define name="body">
 		
 			<h:form>
 				<h:panelGrid columns="2">
@@ -34,6 +34,6 @@
 				</rich:dataTable>
 			</h:form>
 			
-		</h:body>
-	</f:view>	
+		</ui:define>
+	</ui:composition>
 </html>

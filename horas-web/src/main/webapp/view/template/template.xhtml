@@ -3,14 +3,26 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:ui="http://java.sun.com/jsf/facelets" 
-	xmlns:rich="http://richfaces.org/rich">
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
 	<h:head>
 		<ui:insert name="css" />
+		<link href="assets/css/bootstrap.css" rel="stylesheet" />
 		<ui:insert name="javascript" />
+		<h:outputScript name="jquery.js" />
 	</h:head>
 	<h:body>
 		<ui:insert name="metadata" />
-		<rich:messages />
-		<ui:insert name="body" />
+		<table width="100%" border="0">
+			<tr>
+				<td style="width: 160px;" valign="top" align="center">
+					<ui:include src="/view/template/menu.xhtml" />
+				</td>
+				<td valign="top" align="left">
+					<rich:messages id="messages" />
+					<ui:insert name="body" />
+				</td>
+			</tr>
+		</table>
 	</h:body>
 </html>

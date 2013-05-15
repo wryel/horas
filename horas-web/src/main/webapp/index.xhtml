@@ -2,37 +2,12 @@
 <html 
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:rich="http://richfaces.org/rich">
-	<f:view>
-	<h:head />
-		<h:body>
-			<h:form>			
-				<rich:panelMenu>
-					<rich:panelMenuGroup expanded="true">
-						<rich:panelMenuItem> 
-							<h:commandLink action="#{clienteController.listagem}">
-								<h:outputText value="#{msg['cliente']}" />
-							</h:commandLink>
-						</rich:panelMenuItem>
-						<rich:panelMenuItem> 
-							<h:commandLink action="#{projetoController.listagem}">
-								<h:outputText value="#{msg['projeto']}" />
-							</h:commandLink>
-						</rich:panelMenuItem>
-						<rich:panelMenuItem> 
-							<h:commandLink action="#{demandaController.listagem}">
-								<h:outputText value="#{msg['demanda']}" />
-							</h:commandLink>
-						</rich:panelMenuItem>
-						<rich:panelMenuItem> 
-							<h:commandLink action="#{apontamentoController.pesquisarDemandaParaLancarApontamento}">
-								<h:outputText value="#{msg['apontamento']}" />
-							</h:commandLink>
-						</rich:panelMenuItem>
-					</rich:panelMenuGroup>
-				</rich:panelMenu>
-			</h:form>
-		</h:body>
-	</f:view>
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:rich="http://richfaces.org/rich" 
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:composition template="/view/template/template.xhtml">
+		<ui:define name="body">
+			Teste
+		</ui:define>
+	</ui:composition>
 </html>
