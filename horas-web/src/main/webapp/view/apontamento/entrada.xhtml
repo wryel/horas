@@ -24,10 +24,10 @@
 						<h:inputText value="#{apontamentoController.bean.descricao}" />
 						
 						<h:outputText value="#{msg['apontamento.inicio']}:" />
-						<rich:calendar value="#{apontamentoController.bean.inicio}" datePattern="dd/MM/yyyy HH:mm" />
+						<rich:calendar value="#{apontamentoController.bean.inicio}" datePattern="dd/MM/yyyy HH:mm" enableManualInput="true" />
 						
 						<h:outputText value="#{msg['apontamento.fim']}:" />
-						<rich:calendar value="#{apontamentoController.bean.fim}" datePattern="dd/MM/yyyy HH:mm" />
+						<rich:calendar value="#{apontamentoController.bean.fim}" datePattern="dd/MM/yyyy HH:mm" enableManualInput="true" />
 						
 						<h:commandButton value="#{msg['adicionar']}" action="#{apontamentoController.salvarAdicionar}" />
 						

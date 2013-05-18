@@ -25,11 +25,19 @@
 						</f:facet>
 						<h:outputText value="#{cliente.id}" />
 					</rich:column>
+					
 					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="#{msg['cliente.nome']}" />
 						</f:facet>
 						<h:outputText value="#{cliente.nome}" />
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg['editar']}" />
+						</f:facet>
+						-
 					</rich:column>
 				</rich:dataTable>
 			</h:form>
