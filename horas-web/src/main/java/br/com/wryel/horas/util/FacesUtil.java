@@ -41,14 +41,14 @@ public final class FacesUtil {
 	}
 
 	public void showInfo(String key) {
-		String info = getResourceBundle().getString(key);
+		String info = getResourceBundleMessages().getString(key);
 		FacesMessage facesMessage = new FacesMessage(info);
 		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 		getFacesContext().addMessage(null, facesMessage);
 	}
 	
 	public void showError(String key) {
-		String info = getResourceBundle().getString(key);
+		String info = getResourceBundleMessages().getString(key);
 		FacesMessage facesMessage = new FacesMessage(info);
 		facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 		getFacesContext().addMessage(null, facesMessage);
@@ -66,6 +66,11 @@ public final class FacesUtil {
 
 	private ResourceBundle getResourceBundle() {
 		ResourceBundle resourceBundle = getFacesContext().getApplication().getResourceBundle(getFacesContext(), "msg");
+		return resourceBundle;
+	}
+	
+	private ResourceBundle getResourceBundleMessages() {
+		ResourceBundle resourceBundle = getFacesContext().getApplication().getResourceBundle(getFacesContext(), "messages");
 		return resourceBundle;
 	}
 	

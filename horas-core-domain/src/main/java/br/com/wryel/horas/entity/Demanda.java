@@ -1,6 +1,7 @@
 package br.com.wryel.horas.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Demanda implements Serializable {
@@ -23,6 +25,9 @@ public class Demanda implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_projeto", columnDefinition = "INTEGER UNSIGNED")
 	private Projeto projeto;
+	
+	@OneToMany(mappedBy = "demanda")
+	private List<Apontamento> apontamentos;
 	
 	private String nome;
 
@@ -66,6 +71,20 @@ public class Demanda implements Serializable {
 	 */
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	/**
+	 * @return the apontamentos
+	 */
+	public List<Apontamento> getApontamentos() {
+		return apontamentos;
+	}
+
+	/**
+	 * @param apontamentos the apontamentos to set
+	 */
+	public void setApontamentos(List<Apontamento> apontamentos) {
+		this.apontamentos = apontamentos;
 	}
 
 	/* (non-Javadoc)

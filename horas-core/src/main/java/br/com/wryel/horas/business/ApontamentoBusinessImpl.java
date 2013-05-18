@@ -1,10 +1,13 @@
 package br.com.wryel.horas.business;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import br.com.wryel.horas.dao.ApontamentoDAO;
 import br.com.wryel.horas.entity.Apontamento;
+import br.com.wryel.horas.entity.Demanda;
 import br.com.wryel.horas.entity.filter.ApontamentoFilter;
 
 @Stateless
@@ -18,5 +21,13 @@ public class ApontamentoBusinessImpl extends BusinessImpl<Apontamento, Integer, 
 	@Override
 	public void setDAO(ApontamentoDAO entityDAO) {
 		this.dao = entityDAO;
+	}
+
+	@Override
+	public List<Apontamento> listApontamentosPorDemanda(Demanda demanda) {
+		
+		List<Apontamento> apontamentos = dao.listApontamentosPorDemanda(demanda);
+		
+		return apontamentos;
 	}	
 }

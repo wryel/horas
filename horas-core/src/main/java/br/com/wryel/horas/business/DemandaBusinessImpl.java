@@ -8,7 +8,7 @@ import br.com.wryel.horas.entity.Demanda;
 import br.com.wryel.horas.entity.filter.DemandaFilter;
 
 @Stateless
-public class DemandaBusinessImpl extends BusinessImpl<Demanda, Integer, DemandaFilter, DemandaDAO> implements DemandaBusiness {
+public class DemandaBusinessImpl extends BusinessImpl<Demanda, Long, DemandaFilter, DemandaDAO> implements DemandaBusiness {
 
 	public DemandaBusinessImpl() {
 		super(Demanda.class);

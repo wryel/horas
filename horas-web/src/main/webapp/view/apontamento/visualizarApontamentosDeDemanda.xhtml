@@ -8,7 +8,57 @@
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="body">
 			<h:form>
-				<h:outputText value="#{demandaController.bean.nome}" />
+				<rich:panel>
+					<f:facet name="header">
+						<h:outputText value="#{msg['apontamento']} - #{demandaController.bean.nome}" />
+					</f:facet>
+					
+					<h:form>
+						<h:commandButton value="#{msg['adicionar']}" action="#{apontamentoController.adicionar}" />
+					</h:form>
+					
+					<rich:dataTable value="#{apontamentoController.list}" var="apontamento">
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['apontamento.descricao']}" />
+							</f:facet>
+							<h:outputText value="#{apontamento.descricao}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['demanda']}" />
+							</f:facet>
+							<h:outputText value="#{apontamento.demanda.nome}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['projeto']}" />
+							</f:facet>
+							<h:outputText value="#{apontamento.demanda.projeto.nome}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['apontamento.inicio']}" />
+							</f:facet>
+							<h:outputText value="#{apontamento.inicio}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['apontamento.fim']}" />
+							</f:facet>
+							<h:outputText value="#{apontamento.fim}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</rich:column>
+	
+					</rich:dataTable>
+				</rich:panel>
 			</h:form>
 		</ui:define>
 	</ui:composition>

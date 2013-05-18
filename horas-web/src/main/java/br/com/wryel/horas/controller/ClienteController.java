@@ -54,7 +54,7 @@ public class ClienteController extends AbstractController<Cliente> implements Se
 	
 	public String adicionar() {
 		FacesUtil.getInstance().getFlashScope().put(AppContext.ACAO, AppContext.ADICIONAR);
-		FacesUtil.getInstance().getFlashScope().put(flahKey(), new Cliente());
+		FacesUtil.getInstance().getFlashScope().put(flashEntityKey(), new Cliente());
 		return nav(entrada());
 	}
 	

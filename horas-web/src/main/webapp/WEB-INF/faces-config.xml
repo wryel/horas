@@ -9,8 +9,12 @@
 	        <default-locale>pt_BR</default-locale>
 	    </locale-config>
 	    <resource-bundle>
-	        <base-name>ResourceMessages</base-name>
+	        <base-name>Labels</base-name>
 	        <var>msg</var>
+	    </resource-bundle>
+	    <resource-bundle>
+	        <base-name>Messages</base-name>
+	        <var>messages</var>
 	    </resource-bundle>
 	</application>
 	<converter>

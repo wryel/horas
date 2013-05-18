@@ -6,7 +6,7 @@ import br.com.wryel.horas.entity.Demanda;
 import br.com.wryel.horas.entity.filter.DemandaFilter;
 
 @Stateless
-public class DemandaDAOImpl extends DAOImpl<Demanda, Integer, DemandaFilter> implements DemandaDAO {
+public class DemandaDAOImpl extends DAOImpl<Demanda, Long, DemandaFilter> implements DemandaDAO {
 
 	private static final String SELECT = "SELECT d FROM Demanda d ";
 	

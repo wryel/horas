@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:rich="http://richfaces.org/rich" 
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:composition template="/view/template/template.xhtml">
+		<ui:define name="body">
+			<rich:panel>
+				<f:facet name="header">
+					<h:outputText value="#{msg['apontamento']}" />
+				</f:facet>
+				<h:form>
+					<h:panelGrid columns="2">
+					
+						<h:outputText value="#{msg['projeto']}:" />
+						<h:outputText value="#{demandaController.bean.projeto.nome}" />	
+					
+						<h:outputText value="#{msg['demanda']}:" />
+						<h:outputText value="#{demandaController.bean.nome}" />
+						
+						<h:outputText value="#{msg['apontamento.descricao']}:" />
+						<h:inputText value="#{apontamentoController.bean.descricao}" />
+						
+						<h:outputText value="#{msg['apontamento.inicio']}:" />
+						<rich:calendar value="#{apontamentoController.bean.inicio}" datePattern="dd/MM/yyyy HH:mm" />
+						
+						<h:outputText value="#{msg['apontamento.fim']}:" />
+						<rich:calendar value="#{apontamentoController.bean.fim}" datePattern="dd/MM/yyyy HH:mm" />
+						
+						<h:commandButton value="#{msg['adicionar']}" action="#{apontamentoController.salvarAdicionar}" />
+						
+					</h:panelGrid>	
+				</h:form>
+			</rich:panel>
+		</ui:define>
+	</ui:composition>
+</html>

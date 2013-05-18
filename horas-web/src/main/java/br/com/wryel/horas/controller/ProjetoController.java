@@ -71,7 +71,7 @@ public class ProjetoController extends AbstractController<Projeto> {
 	}
 	
 	public String adicionar() {
-		FacesUtil.getInstance().getFlashScope().put(flahKey(), new Projeto());
+		FacesUtil.getInstance().getFlashScope().put(flashEntityKey(), new Projeto());
 		return nav(entrada()) + "?action=add";
 	}
 	

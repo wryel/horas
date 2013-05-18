@@ -33,10 +33,14 @@ public abstract class AbstractController<Bean extends Serializable> implements S
 	public static final String ENTITY = "entity";
 	
 	@PostConstruct
+	@SuppressWarnings("unchecked")
 	public void debugConstruct() {
 		System.out.println("Criando instancia de " + getClass().getSimpleName());
-		if (FacesUtil.getInstance().getFlashScope().containsKey(flahKey())) {
-			setBean(beanClass.cast(FacesUtil.getInstance().getFlashScope().get(flahKey())));
+		if (FacesUtil.getInstance().getFlashScope().containsKey(flashEntityKey())) {
+			setBean(beanClass.cast(FacesUtil.getInstance().getFlashScope().get(flashEntityKey())));
+		}
+		if (FacesUtil.getInstance().getFlashScope().containsKey(flashListKey())) {
+			setList((List<Bean>) FacesUtil.getInstance().getFlashScope().get(flashListKey()));
 		}
 	}
 	
@@ -117,14 +121,12 @@ public abstract class AbstractController<Bean extends Serializable> implements S
 		String lastViewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
 		return lastViewId.contains(nextViewId) ? Navegacao.ATUAL : nextViewId;
 	}
-
-	public void retrieveBeanFromFlashEvent() {
-		if (!FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
-			bean = beanClass.cast(FacesUtil.getInstance().getFlashScope().get(flahKey()));			
-		}
+	
+	public String flashEntityKey() {
+		return "flashEntity" + getClass().getSimpleName(); 
 	}
 	
-	public String flahKey() {
-		return "entity_" + getClass().getSimpleName(); 
+	public String flashListKey() {
+		return "flashList" + getClass().getSimpleName(); 
 	}
 }

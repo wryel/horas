@@ -10,6 +10,8 @@ public class DemandaFilter extends EntityFilter<Demanda> {
 	private static final long serialVersionUID = 1L;
 
 	private String nomeLikeRight;
+	
+	private Long idEquals;
 
 	/**
 	 * @return the nomeLikeRight
@@ -23,5 +25,19 @@ public class DemandaFilter extends EntityFilter<Demanda> {
 	 */
 	public void setNomeLikeRight(String nomeLikeRight) {
 		this.nomeLikeRight = nomeLikeRight;
+	}
+
+	/**
+	 * @return the idEquals
+	 */
+	public Long getIdEquals() {
+		return idEquals;
+	}
+
+	/**
+	 * @param idEquals the idEquals to set
+	 */
+	public void setIdEquals(Long idEquals) {
+		this.idEquals = idEquals;
 	}
 }

@@ -12,7 +12,7 @@ public class SessionUtil {
 	}
 	
 	public Usuario getUsuarioLogado() {
-		Usuario usuario = (Usuario) FacesUtil.getInstance().getSession().getAttribute(AppContext.Session.USUARIO);
+		Usuario usuario = (Usuario) (FacesUtil.getInstance().getSession().getAttribute(AppContext.Session.USUARIO) == null ? new Usuario(1) : FacesUtil.getInstance().getSession().getAttribute(AppContext.Session.USUARIO));
 		return usuario;
 	}
 	

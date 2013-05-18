@@ -21,8 +21,8 @@ public class Apontamento implements Serializable {
 	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_projeto", nullable = false, columnDefinition = "INTEGER UNSIGNED")
-	private Projeto projeto;
+	@JoinColumn(name = "id_demanda", nullable = false, columnDefinition = "INTEGER UNSIGNED")
+	private Demanda demanda;
 	
 	@Column(nullable = false)
 	private String descricao;
@@ -46,24 +46,28 @@ public class Apontamento implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	/**
-	 * @return the projeto
+	 * @return the demanda
 	 */
-	public Projeto getProjeto() {
-		return projeto;
+	public Demanda getDemanda() {
+		return demanda;
 	}
 	/**
-	 * @param projeto the projeto to set
+	 * @param demanda the demanda to set
 	 */
-	public void setProjeto(Projeto projeto) {
-		this.projeto = projeto;
+
+	public void setDemanda(Demanda demanda) {
+		this.demanda = demanda;
 	}
+	
 	/**
 	 * @return the descricao
 	 */
 	public String getDescricao() {
 		return descricao;
 	}
+	
 	/**
 	 * @param descricao the descricao to set
 	 */
@@ -140,7 +144,7 @@ public class Apontamento implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Apontamento [id=" + id + ", projeto=" + projeto
+		return "Apontamento [id=" + id + ", demanda=" + demanda
 				+ ", descricao=" + descricao + ", inicio=" + inicio + ", fim="
 				+ fim + ", usuario=" + usuario + "]";
 	}

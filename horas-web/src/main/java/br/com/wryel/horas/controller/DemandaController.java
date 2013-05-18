@@ -50,7 +50,7 @@ public class DemandaController extends AbstractController<Demanda> {
 	}
 	
 	public String adicionar() {
-		FacesUtil.getInstance().getFlashScope().put(flahKey(), new Demanda());
+		FacesUtil.getInstance().getFlashScope().put(flashEntityKey(), new Demanda());
 		return nav(entrada()) + "? action=add";
 	}
 	
