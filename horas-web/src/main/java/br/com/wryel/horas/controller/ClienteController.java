@@ -6,7 +6,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import br.com.wryel.horas.AppContext;
 import br.com.wryel.horas.business.BusinessException;
 import br.com.wryel.horas.business.ClienteBusiness;
 import br.com.wryel.horas.entity.Cliente;
@@ -52,8 +51,14 @@ public class ClienteController extends AbstractController<Cliente> implements Se
 		return Navegacao.Cliente.LISTAGEM;
 	}
 	
+	public String editar() {
+		FacesUtil.getInstance().getFlashScope().put(ACTION, ACTION_EDIT);
+		FacesUtil.getInstance().getFlashScope().put(flashEntityKey(), getBean());
+		return nav(entrada());
+	}
+	
 	public String adicionar() {
-		FacesUtil.getInstance().getFlashScope().put(AppContext.ACAO, AppContext.ADICIONAR);
+		FacesUtil.getInstance().getFlashScope().put(ACTION, ACTION_ADD);
 		FacesUtil.getInstance().getFlashScope().put(flashEntityKey(), new Cliente());
 		return nav(entrada());
 	}

@@ -6,22 +6,22 @@
 	<h:form>			
 		<rich:panelMenu>
 			<rich:panelMenuGroup expanded="true">
-				<rich:panelMenuItem> 
+				<rich:panelMenuItem leftIcon="/resources/imagem/cliente.png"> 
 					<h:commandLink action="#{clienteController.listagem}">
 						<h:outputText value="#{msg['cliente']}" />
 					</h:commandLink>
 				</rich:panelMenuItem>
-				<rich:panelMenuItem> 
+				<rich:panelMenuItem leftIcon="/resources/imagem/projeto.png"> 
 					<h:commandLink action="#{projetoController.listagem}">
 						<h:outputText value="#{msg['projeto']}" />
 					</h:commandLink>
 				</rich:panelMenuItem>
-				<rich:panelMenuItem> 
+				<rich:panelMenuItem leftIcon="/resources/imagem/demanda.png"> 
 					<h:commandLink action="#{demandaController.listagem}">
 						<h:outputText value="#{msg['demanda']}" />
 					</h:commandLink>
 				</rich:panelMenuItem>
-				<rich:panelMenuItem> 
+				<rich:panelMenuItem leftIcon="/resources/imagem/apontamento.png"> 
 					<h:commandLink action="#{apontamentoController.pesquisarDemandaParaLancarApontamento}">
 						<h:outputText value="#{msg['apontamento']}" />
 					</h:commandLink>

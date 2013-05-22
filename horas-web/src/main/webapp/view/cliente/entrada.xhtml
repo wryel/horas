@@ -16,7 +16,8 @@
 						<h:outputText value="#{msg['cliente.nome']}" />
 						<h:inputText value="#{clienteController.bean.nome}" />
 					</h:panelGrid>
-					<h:commandButton action="#{clienteController.salvarAdicionar}" value="#{msg['adicionar']}" />
+					<h:commandButton action="#{clienteController.salvarAdicionar}" value="#{msg['adicionar']}" rendered="#{clienteController.action == 'add'}" />
+					<h:commandButton action="#{clienteController.salvarEditar}" value="#{msg['editar']}" rendered="#{clienteController.action == 'edit'}" />
 				</h:form>
 			</rich:panel>						
 		</ui:define>

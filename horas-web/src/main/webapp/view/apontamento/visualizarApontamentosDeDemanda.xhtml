@@ -17,7 +17,15 @@
 						<h:commandButton value="#{msg['adicionar']}" action="#{apontamentoController.adicionar}" />
 					</h:form>
 					
-					<rich:dataTable value="#{apontamentoController.list}" var="apontamento">
+					<rich:dataTable value="#{apontamentoController.list}" var="apontamento" styleClass="cemPorCento">
+					
+						<rich:column styleClass="negrito centralizar">
+							<f:facet name="header">
+								<h:outputText value="#{msg['apontamento.id']}" />
+							</f:facet>
+							<h:outputText value="#{apontamento.id}" />
+						</rich:column>
+					
 						<rich:column>
 							<f:facet name="header">
 								<h:outputText value="#{msg['apontamento.descricao']}" />
@@ -41,6 +49,13 @@
 						
 						<rich:column>
 							<f:facet name="header">
+								<h:outputText value="#{msg['cliente']}" />
+							</f:facet>
+							<h:outputText value="#{apontamento.demanda.projeto.cliente.nome}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
 								<h:outputText value="#{msg['apontamento.inicio']}" />
 							</f:facet>
 							<h:outputText value="#{apontamento.inicio}">
@@ -55,6 +70,16 @@
 							<h:outputText value="#{apontamento.fim}">
 								<f:convertDateTime pattern="dd/MM/yyyy" />
 							</h:outputText>
+						</rich:column>
+						
+						<rich:column styleClass="centralizar">
+							<f:facet name="header">
+								<h:outputText value="#{msg['editar']}" />
+							</f:facet>
+							<h:commandLink action="#{apontamentoController.editar}">
+								<f:setPropertyActionListener target="#{apontamentoController.bean}" value="#{apontamento}" />
+								<h:graphicImage url="/resources/imagem/editar.png" width="16" height="16" />
+							</h:commandLink>
 						</rich:column>
 	
 					</rich:dataTable>

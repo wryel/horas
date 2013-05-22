@@ -42,6 +42,9 @@ public abstract class AbstractController<Bean extends Serializable> implements S
 		if (FacesUtil.getInstance().getFlashScope().containsKey(flashListKey())) {
 			setList((List<Bean>) FacesUtil.getInstance().getFlashScope().get(flashListKey()));
 		}
+		if (FacesUtil.getInstance().getFlashScope().containsKey(ACTION)) {
+			setAction((String) FacesUtil.getInstance().getFlashScope().get(ACTION));
+		}
 	}
 	
 	@PreDestroy

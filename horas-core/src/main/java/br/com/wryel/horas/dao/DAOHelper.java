@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,6 +13,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Id;
 
 import org.apache.commons.beanutils.BeanUtilsBean;
+import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.beanutils.converters.IntegerConverter;
 import org.apache.commons.lang.StringUtils;
 
@@ -24,6 +26,10 @@ import br.com.wryel.horas.exception.HorasRuntimeException;
  */
 public final class DAOHelper {
 	
+	static {
+		
+	}
+	
 	/**
 	 * 
 	 * @param destino destino
@@ -32,8 +38,10 @@ public final class DAOHelper {
 	public static void copyProperties(final Object destino, final Object origem) {
 		try {
 			IntegerConverter integerConverter = new IntegerConverter(null);
+			DateConverter dateConverter = new DateConverter(null);
 			BeanUtilsBean beanUtilsBean = BeanUtilsBean.getInstance();
 			beanUtilsBean.getConvertUtils().register(integerConverter, Integer.class);
+			beanUtilsBean.getConvertUtils().register(dateConverter, Date.class);
 			beanUtilsBean.copyProperties(destino, origem);
 		} catch (Exception e) {
 			throw new HorasRuntimeException("Erro ao copiar proriedades de beans " + destino +" e " + origem, e);

@@ -42,12 +42,29 @@ public class ApontamentoController extends AbstractController<Apontamento> {
 		return Navegacao.Apontamento.ENTRADA;
 	}
 	
+	public String editar() {
+		
+		Apontamento apontamento = apontamentoBusiness.get(getBean().getId());
+		
+		FacesUtil.getInstance().getFlashScope().put(ACTION, ACTION_EDIT);
+		FacesUtil.getInstance().getFlashScope().put(flashEntityKey(), apontamento);
+		
+		DemandaController demandaController = FacesUtil.getInstance().getController(DemandaController.class);
+		
+		FacesUtil.getInstance().getFlashScope().put(demandaController.flashEntityKey(), apontamento.getDemanda());
+		
+		return nav(entrada());
+	}
+	
+	
+	
 	public String adicionar() {
 		
 		DemandaController demandaController = FacesUtil.getInstance().getController(DemandaController.class);
 		
 		Demanda demanda = demandaController.getBean();
 		
+		FacesUtil.getInstance().getFlashScope().put(ACTION, ACTION_ADD);
 		FacesUtil.getInstance().getFlashScope().put(flashEntityKey(), new Apontamento());
 		FacesUtil.getInstance().getFlashScope().put(demandaController.flashEntityKey(), demanda);
 		
@@ -73,6 +90,24 @@ public class ApontamentoController extends AbstractController<Apontamento> {
 		return nav(pesquisarDemandaParaLancarApontamento());
 	}
 	
+	public String salvarEditar() throws BusinessException {
+		
+		DemandaController demandaController = FacesUtil.getInstance().getController(DemandaController.class);
+		
+		Demanda demanda = demandaBusiness.get(demandaController.getBean().getId());
+		
+		getBean().setDemanda(demanda);
+
+		apontamentoBusiness.update(getBean());
+		
+		FacesUtil.getInstance().showInfo("apontamento.salvo");
+		
+		FacesUtil.getInstance().getFlashScope().put(flashListKey(), apontamentoBusiness.listApontamentosPorDemanda(demanda));
+		
+		return nav(visualizarApontamentosDeDemanda()); 
+		
+	}
+	
 	public String salvarAdicionar() throws BusinessException {
 		
 		DemandaController demandaController = FacesUtil.getInstance().getController(DemandaController.class);
@@ -80,6 +115,7 @@ public class ApontamentoController extends AbstractController<Apontamento> {
 		Demanda demanda = demandaController.getBean();
 		
 		getBean().setDemanda(demanda);
+		
 		getBean().setUsuario(SessionUtil.getInstance().getUsuarioLogado());
 		
 		apontamentoBusiness.insert(getBean());

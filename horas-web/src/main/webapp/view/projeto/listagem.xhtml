@@ -6,40 +6,47 @@
 	xmlns:rich="http://richfaces.org/rich" 
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	<ui:composition template="/view/template/template.xhtml">
-		<ui:define name="body">			
-			<h:form>
-				<h:panelGrid columns="2">
-					<h:outputLabel value="#{msg['projeto.nome']}" />
-					<h:inputText value="#{projetoController.filter.nomeLikeRight}" />
-					<h:commandButton value="#{msg['adicionar']}" action="#{projetoController.adicionar}">
-						<f:viewParam name="action" value="add" />
-					</h:commandButton>
-					<h:commandButton value="#{msg['pesquisar']}" action="#{projetoController.pesquisar}" />
-				</h:panelGrid>
-			</h:form>
-	
-			<h:form>
-				<rich:dataTable value="#{projetoController.list}" var="projeto">
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText value="#{msg['projeto.id']}" />
-						</f:facet>
-						<h:outputText value="#{projeto.id}" />
-					</rich:column>
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText value="#{msg['projeto.nome']}" />
-						</f:facet>
-						<h:outputText value="#{projeto.nome}" />
-					</rich:column>
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText value="#{msg['cliente.nome']}" />
-						</f:facet>
-						<h:outputText value="#{projeto.cliente.nome}" />
-					</rich:column>
-				</rich:dataTable>
-			</h:form>
+		<ui:define name="body">
+			<rich:panel>
+				<f:facet name="header">
+					<h:outputText value="#{msg['projeto']}" />
+				</f:facet>
+				
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="#{msg['projeto.nome']}" />
+						<h:inputText value="#{projetoController.filter.nomeLikeRight}" />
+						<h:commandButton value="#{msg['adicionar']}" action="#{projetoController.adicionar}">
+							<f:viewParam name="action" value="add" />
+						</h:commandButton>
+						<h:commandButton value="#{msg['pesquisar']}" action="#{projetoController.pesquisar}" />
+					</h:panelGrid>
+				</h:form>
+		
+				<h:form>
+					<rich:dataTable value="#{projetoController.list}" var="projeto" styleClass="cemPorCento">
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['projeto.id']}" />
+							</f:facet>
+							<h:outputText value="#{projeto.id}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['projeto.nome']}" />
+							</f:facet>
+							<h:outputText value="#{projeto.nome}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['cliente']}" />
+							</f:facet>
+							<h:outputText value="#{projeto.cliente.nome}" />
+						</rich:column>
+					</rich:dataTable>
+				</h:form>
+				
+			</rich:panel>
 		</ui:define>
 	</ui:composition>	
 </html>

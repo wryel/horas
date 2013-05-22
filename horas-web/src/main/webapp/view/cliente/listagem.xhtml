@@ -7,41 +7,49 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="body">
-		
-			<h:form>
-				<h:panelGrid columns="2">
-					<h:outputLabel value="#{msg['cliente.nome']}" />
-					<h:inputText value="#{clienteController.filter.nomeLikeRight}" />
-					<h:commandButton value="#{msg['adicionar']}" action="#{clienteController.adicionar}" />
-					<h:commandButton value="#{msg['pesquisar']}" action="#{clienteController.pesquisar}" />
-				</h:panelGrid>
-			</h:form>
-
-			<h:form>
-				<rich:dataTable value="#{clienteController.list}" var="cliente">
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText value="#{msg['cliente.id']}" />
-						</f:facet>
-						<h:outputText value="#{cliente.id}" />
-					</rich:column>
-					
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText value="#{msg['cliente.nome']}" />
-						</f:facet>
-						<h:outputText value="#{cliente.nome}" />
-					</rich:column>
-					
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText value="#{msg['editar']}" />
-						</f:facet>
-						-
-					</rich:column>
-				</rich:dataTable>
-			</h:form>
-			
+			<rich:panel>
+				<f:facet name="header">
+					<h:outputText value="#{msg['cliente']}" />
+				</f:facet>
+				
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="#{msg['cliente.nome']}" />
+						<h:inputText value="#{clienteController.filter.nomeLikeRight}" />
+						<h:commandButton value="#{msg['adicionar']}" action="#{clienteController.adicionar}" />
+						<h:commandButton value="#{msg['pesquisar']}" action="#{clienteController.pesquisar}" />
+					</h:panelGrid>
+				</h:form>
+	
+				<h:form>
+					<rich:dataTable value="#{clienteController.list}" var="cliente" styleClass="cemPorCento">
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['cliente.id']}" />
+							</f:facet>
+							<h:outputText value="#{cliente.id}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['cliente.nome']}" />
+							</f:facet>
+							<h:outputText value="#{cliente.nome}" />
+						</rich:column>
+						
+						<rich:column styleClass="centralizar">
+							<f:facet name="header">
+								<h:outputText value="#{msg['editar']}" />
+							</f:facet>
+							<h:commandLink action="#{clienteController.editar}">
+								<f:setPropertyActionListener target="#{clienteController.bean}" value="#{cliente}" />
+								<h:graphicImage url="/resources/imagem/editar.png" width="16" height="16" />
+							</h:commandLink>
+						</rich:column>
+					</rich:dataTable>
+				</h:form>
+				
+			</rich:panel>			
 		</ui:define>
 	</ui:composition>
 </html>

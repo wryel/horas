@@ -1,0 +1,22 @@
+@CHARSET "ISO-8859-1";
+
+* {
+	margin: 0px;
+	font-size: 15px;
+}
+
+img {
+	border: 0px solid;
+}
+
+.cemPorCento {
+	width: 100%;
+}
+
+.negrito {
+	font-weight: bold;
+}
+
+.centralizar {
+	text-align: center;
+}
