@@ -1,12 +1,14 @@
 package br.com.wryel.horas.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cliente implements Serializable {
@@ -19,6 +21,9 @@ public class Cliente implements Serializable {
 	private Integer id;
 	
 	private String nome;
+	
+	@OneToMany(mappedBy = "cliente")
+	private List<Projeto> projetos;
 
 	/**
 	 * @return the id
@@ -46,6 +51,20 @@ public class Cliente implements Serializable {
 	 */
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	/**
+	 * @return the projetos
+	 */
+	public List<Projeto> getProjetos() {
+		return projetos;
+	}
+
+	/**
+	 * @param projetos the projetos to set
+	 */
+	public void setProjetos(List<Projeto> projetos) {
+		this.projetos = projetos;
 	}
 
 	/* (non-Javadoc)

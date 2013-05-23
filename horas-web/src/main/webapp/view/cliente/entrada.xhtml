@@ -13,11 +13,13 @@
 				</f:facet>
 				<h:form>
 					<h:panelGrid columns="2">
-						<h:outputText value="#{msg['cliente.nome']}" />
-						<h:inputText value="#{clienteController.bean.nome}" />
+						<h:outputLabel for="nome" value="#{msg['cliente.nome']}" styleClass="negrito" />
+						<h:inputText id="nome" value="#{clienteController.bean.nome}" />
 					</h:panelGrid>
-					<h:commandButton action="#{clienteController.salvarAdicionar}" value="#{msg['adicionar']}" rendered="#{clienteController.action == 'add'}" />
-					<h:commandButton action="#{clienteController.salvarEditar}" value="#{msg['editar']}" rendered="#{clienteController.action == 'edit'}" />
+					<h:panelGrid>
+						<h:commandButton action="#{clienteController.salvarAdicionar}" value="#{msg['adicionar']}" rendered="#{clienteController.action == 'add'}" />
+						<h:commandButton action="#{clienteController.salvarEditar}" value="#{msg['editar']}" rendered="#{clienteController.action == 'edit'}" />
+					</h:panelGrid>
 				</h:form>
 			</rich:panel>						
 		</ui:define>

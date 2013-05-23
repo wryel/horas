@@ -13,6 +13,8 @@ public class DemandaFilter extends EntityFilter<Demanda> {
 	
 	private Long idEquals;
 
+	private ProjetoFilter projetoFilter;
+	
 	/**
 	 * @return the nomeLikeRight
 	 */
@@ -39,5 +41,19 @@ public class DemandaFilter extends EntityFilter<Demanda> {
 	 */
 	public void setIdEquals(Long idEquals) {
 		this.idEquals = idEquals;
+	}
+
+	/**
+	 * @return the projetoFilter
+	 */
+	public ProjetoFilter getProjetoFilter() {
+		return projetoFilter;
+	}
+
+	/**
+	 * @param projetoFilter the projetoFilter to set
+	 */
+	public void setProjetoFilter(ProjetoFilter projetoFilter) {
+		this.projetoFilter = projetoFilter;
 	}
 }

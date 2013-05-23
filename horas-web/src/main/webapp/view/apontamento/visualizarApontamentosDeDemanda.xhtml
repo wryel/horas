@@ -7,84 +7,95 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="body">
-			<h:form>
 				<rich:panel>
 					<f:facet name="header">
 						<h:outputText value="#{msg['apontamento']} - #{demandaController.bean.nome}" />
 					</f:facet>
-					
+
 					<h:form>
-						<h:commandButton value="#{msg['adicionar']}" action="#{apontamentoController.adicionar}" />
+						<rich:panel>
+							<h:panelGrid columns="2">
+								<h:outputLabel for="descricao" value="#{msg['apontamento.descricao']}:" />
+								<h:inputText id="descricao" value="#{apontamentoController.filter.descricaoLikeRight}" />
+							
+								<h:commandButton value="#{msg['adicionar']}" action="#{apontamentoController.adicionar}" />
+								<h:commandButton value="#{msg['pesquisar']}" action="#{apontamentoController.pesquisarApontamentosEmDemanda}" />
+							</h:panelGrid>
+						</rich:panel>
 					</h:form>
+		
+					<br />
 					
-					<rich:dataTable value="#{apontamentoController.list}" var="apontamento" styleClass="cemPorCento">
-					
-						<rich:column styleClass="negrito centralizar">
-							<f:facet name="header">
-								<h:outputText value="#{msg['apontamento.id']}" />
-							</f:facet>
-							<h:outputText value="#{apontamento.id}" />
-						</rich:column>
-					
-						<rich:column>
-							<f:facet name="header">
-								<h:outputText value="#{msg['apontamento.descricao']}" />
-							</f:facet>
-							<h:outputText value="#{apontamento.descricao}" />
-						</rich:column>
+					<h:form>					
+						<rich:dataTable value="#{apontamentoController.list}" var="apontamento" styleClass="cemPorCento">
 						
-						<rich:column>
-							<f:facet name="header">
-								<h:outputText value="#{msg['demanda']}" />
-							</f:facet>
-							<h:outputText value="#{apontamento.demanda.nome}" />
-						</rich:column>
+							<rich:column styleClass="negrito alinhaCentro">
+								<f:facet name="header">
+									<h:outputText value="#{msg['apontamento.id']}" />
+								</f:facet>
+								<h:outputText value="#{apontamento.id}" />
+							</rich:column>
 						
-						<rich:column>
-							<f:facet name="header">
-								<h:outputText value="#{msg['projeto']}" />
-							</f:facet>
-							<h:outputText value="#{apontamento.demanda.projeto.nome}" />
-						</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="#{msg['apontamento.descricao']}" />
+								</f:facet>
+								<h:outputText value="#{apontamento.descricao}" />
+							</rich:column>
+							
+							<rich:column styleClass="alinharCentro">
+								<f:facet name="header">
+									<h:outputText value="#{msg['demanda']}" />
+								</f:facet>
+								<h:outputText value="#{apontamento.demanda.nome}" />
+							</rich:column>
+							
+							<rich:column styleClass="alinharCentro">
+								<f:facet name="header">
+									<h:outputText value="#{msg['projeto']}" />
+								</f:facet>
+								<h:outputText value="#{apontamento.demanda.projeto.nome}" />
+							</rich:column>
+							
+							<rich:column styleClass="alinharCentro">
+								<f:facet name="header">
+									<h:outputText value="#{msg['cliente']}" />
+								</f:facet>
+								<h:outputText value="#{apontamento.demanda.projeto.cliente.nome}" />
+							</rich:column>
+							
+							<rich:column styleClass="alinharCentro">
+								<f:facet name="header">
+									<h:outputText value="#{msg['apontamento.inicio']}" />
+								</f:facet>
+								<h:outputText value="#{apontamento.inicio}">
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+								</h:outputText>
+							</rich:column>
+							
+							<rich:column styleClass="alinharCentro">
+								<f:facet name="header">
+									<h:outputText value="#{msg['apontamento.fim']}" />
+								</f:facet>
+								<h:outputText value="#{apontamento.fim}">
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+								</h:outputText>
+							</rich:column>
+							
+							<rich:column styleClass="alinharCentro">
+								<f:facet name="header">
+									<h:outputText value="#{msg['editar']}" />
+								</f:facet>
+								<h:commandLink action="#{apontamentoController.editar}">
+									<f:setPropertyActionListener target="#{apontamentoController.bean}" value="#{apontamento}" />
+									<h:graphicImage url="/resources/imagem/editar.png" width="16" height="16" />
+								</h:commandLink>
+							</rich:column>
 						
-						<rich:column>
-							<f:facet name="header">
-								<h:outputText value="#{msg['cliente']}" />
-							</f:facet>
-							<h:outputText value="#{apontamento.demanda.projeto.cliente.nome}" />
-						</rich:column>
-						
-						<rich:column>
-							<f:facet name="header">
-								<h:outputText value="#{msg['apontamento.inicio']}" />
-							</f:facet>
-							<h:outputText value="#{apontamento.inicio}">
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</h:outputText>
-						</rich:column>
-						
-						<rich:column>
-							<f:facet name="header">
-								<h:outputText value="#{msg['apontamento.fim']}" />
-							</f:facet>
-							<h:outputText value="#{apontamento.fim}">
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</h:outputText>
-						</rich:column>
-						
-						<rich:column styleClass="centralizar">
-							<f:facet name="header">
-								<h:outputText value="#{msg['editar']}" />
-							</f:facet>
-							<h:commandLink action="#{apontamentoController.editar}">
-								<f:setPropertyActionListener target="#{apontamentoController.bean}" value="#{apontamento}" />
-								<h:graphicImage url="/resources/imagem/editar.png" width="16" height="16" />
-							</h:commandLink>
-						</rich:column>
-	
-					</rich:dataTable>
-				</rich:panel>
-			</h:form>
+						</rich:dataTable>
+					</h:form>		
+				
+			</rich:panel>
 		</ui:define>
 	</ui:composition>
 </html>

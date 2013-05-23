@@ -29,9 +29,9 @@
 						<h:outputText value="#{msg['apontamento.fim']}:" />
 						<rich:calendar value="#{apontamentoController.bean.fim}" datePattern="dd/MM/yyyy HH:mm" enableManualInput="true" />
 						
+						<h:commandButton value="#{msg['voltar']}" action="#{apontamentoController.voltarParaVisualizacaoDeApontamentosDeDemanda}" />
 						<h:commandButton value="#{msg['adicionar']}" action="#{apontamentoController.salvarAdicionar}" rendered="#{apontamentoController.action == 'add'}" />
 						<h:commandButton value="#{msg['editar']}" action="#{apontamentoController.salvarEditar}" rendered="#{apontamentoController.action == 'edit'}" />
-						
 					</h:panelGrid>	
 				</h:form>
 			</rich:panel>

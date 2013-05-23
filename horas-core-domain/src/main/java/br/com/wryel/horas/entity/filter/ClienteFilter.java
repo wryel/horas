@@ -10,10 +10,26 @@ public class ClienteFilter extends EntityFilter<Cliente> {
 	private static final long serialVersionUID = 1L;
 
 	private Integer idEquals;
+
+	private String nomeEqual;
 	
 	private String nomeLikeLeft;
 	
 	private String nomeLikeRight;
+	
+	/**
+	 * @return the nomeEqual
+	 */
+	public String getNomeEqual() {
+		return nomeEqual;
+	}
+
+	/**
+	 * @param nomeEqual the nomeEqual to set
+	 */
+	public void setNomeEqual(String nomeEqual) {
+		this.nomeEqual = nomeEqual;
+	}
 
 	/**
 	 * @return the nomeLikeLeft

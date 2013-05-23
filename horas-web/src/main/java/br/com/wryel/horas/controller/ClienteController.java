@@ -69,7 +69,13 @@ public class ClienteController extends AbstractController<Cliente> implements Se
 	}
 	
 	public String salvarAdicionar() throws BusinessException {
-		clienteBusiness.insert(bean);
+		try {
+			clienteBusiness.insert(bean);
+			FacesUtil.getInstance().showInfo("registro.inserido");
+		} catch (BusinessException businessException) {
+			FacesUtil.getInstance().showBusinessError(businessException.getMessage());
+			return nav(entrada());
+		}
 		return nav(listagem());
 	}
 	
@@ -78,8 +84,14 @@ public class ClienteController extends AbstractController<Cliente> implements Se
 		return nav(listagem());
 	}
 	
-	public String excluir() throws BusinessException {
-		clienteBusiness.delete(bean);
+	public String deletar() throws BusinessException {
+		try {
+			clienteBusiness.delete(bean);
+			FacesUtil.getInstance().showInfo("registro.deletado");
+			getList().remove(bean);
+		} catch (BusinessException businessException) {
+			FacesUtil.getInstance().showBusinessError(businessException.getMessage());
+		}
 		return nav(listagem());
 	}
 }

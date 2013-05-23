@@ -27,6 +27,10 @@ public class ClienteDAOImpl extends DAOImpl<Cliente, Integer, ClienteFilter> imp
 		
 		List<String> wheres = new ArrayList<>();
 		
+		if (StringUtils.isNotBlank(filter.getNomeEqual())) {
+			wheres.add("c.nome = :nomeEqual");
+		}
+		
 		if (StringUtils.isNotBlank(filter.getNomeLikeLeft())) {
 			wheres.add("c.nome LIKE :nomeLikeLeft");
 		}
@@ -47,6 +51,10 @@ public class ClienteDAOImpl extends DAOImpl<Cliente, Integer, ClienteFilter> imp
 	protected void applyFilter(TypedQuery<?> query, ClienteFilter filter) {
 		
 		super.applyFilter(query, filter);
+		
+		if (StringUtils.isNotBlank(filter.getNomeEqual())) {
+			query.setParameter("nomeEqual", filter.getNomeEqual().trim());
+		}
 		
 		if (StringUtils.isNotBlank(filter.getNomeLikeLeft())) {	
 			query.setParameter("nomeLikeLeft", "%" + filter.getNomeLikeLeft());

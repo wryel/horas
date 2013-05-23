@@ -54,6 +54,12 @@ public final class FacesUtil {
 		getFacesContext().addMessage(null, facesMessage);
 	}
 	
+	public void showBusinessError(String error) {
+		FacesMessage facesMessage = new FacesMessage(error);
+		facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		getFacesContext().addMessage(null, facesMessage);
+	}
+	
 	public HttpSession getSession() {
 		HttpSession httpSession = getSession(true);
 		return httpSession;

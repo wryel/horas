@@ -9,45 +9,56 @@
 		<ui:define name="body">
 			<rich:panel>
 				<f:facet name="header">
-					<h:outputText value="#{msg['apontamento']}" />
+					<h:outputText value="#{msg['apontamento']} - #{msg['apontamento.pesquisarDemanda']}" />
 				</f:facet>
 			
 				<h:form>
-					<h:panelGrid columns="2">
-						<h:outputLabel value="#{msg['demanda.nome']}" />
-						<h:inputText value="#{demandaController.filter.nomeLikeRight}" />
-						<h:commandButton value="#{msg['adicionar']}" action="#{apontamentoController.adicionar}" />
-						<h:commandButton value="#{msg['pesquisar']}" action="#{apontamentoController.pesquisarDemandas}" />
-					</h:panelGrid>
+					<rich:panel>
+						<h:panelGrid columns="2">
+							<h:outputLabel value="#{msg['demanda']}:" for="demanda" />
+							<h:inputText id="demanda" value="#{demandaController.filter.nomeLikeRight}" />
+							
+							<h:outputLabel value="#{msg['projeto']}:" for="projeto" />
+							<h:inputText id="projeto" />
+							
+							<h:outputLabel value="#{msg['cliente']}:" for="cliente" />
+							<h:selectOneMenu id="cliente">
+								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
+								<f:selectItems value="#{comboController.clientes}" />
+							</h:selectOneMenu>
+							
+							<h:commandButton value="#{msg['pesquisar']}" action="#{apontamentoController.pesquisarDemandas}" />
+						</h:panelGrid>
+					</rich:panel>
 				</h:form>
+				
+				<br />
 	
 				<h:form>
 					<rich:dataTable value="#{demandaController.list}" var="demanda" styleClass="cemPorCento">
-						<rich:column>
+						
+						<rich:column styleClass="negrito alinharCentro">
 							<f:facet name="header">
 								<h:outputText value="#{msg['demanda.id']}" />
 							</f:facet>
 							<h:outputText value="#{demanda.id}" />
 						</rich:column>
-						<rich:column>
+						
+						<rich:column styleClass="alinharEsquerda">
 							<f:facet name="header">
 								<h:outputText value="#{msg['demanda.nome']}" />
 							</f:facet>
 							<h:outputText value="#{demanda.nome}" />
 						</rich:column>
-						<rich:column>
-							<f:facet name="header">
-								<h:outputText value="#{msg['cliente']}" />
-							</f:facet>
-							<h:outputText value="#{demanda.projeto.cliente.nome}" />
-						</rich:column>
-						<rich:column>
+						
+						<rich:column styleClass="alinharCentro">
 							<f:facet name="header">
 								<h:outputText value="#{msg['projeto']}" />
 							</f:facet>
 							<h:outputText value="#{demanda.projeto.nome}" />
 						</rich:column>
-						<rich:column>
+						
+						<rich:column styleClass="alinharCentro">
 							<f:facet name="header">
 								<h:outputText value="#{msg['apontamento.lancar']}" />
 							</f:facet>
@@ -56,9 +67,10 @@
 								<f:setPropertyActionListener target="#{demandaController.bean}" value="#{demanda}" />
 							</h:commandLink>
 						</rich:column>
+					
 					</rich:dataTable>
 				</h:form>
-			
+				
 			</rich:panel>
 		</ui:define>
 	</ui:composition>

@@ -29,6 +29,12 @@ public class ApontamentoDAOImpl extends DAOImpl<Apontamento, Integer, Apontament
 		
 		List<String> wheres = new ArrayList<>();
 		
+		if (StringUtils.isNotEmpty(filter.getDescricaoLikeRight())) {
+			
+			wheres.add("a.descricao LIKE :descricaoLikeRight");
+			
+		}
+		
 		if (filter.getDemandaFilter() != null) {
 			
 			if (filter.getDemandaFilter().getIdEquals() != null) {
@@ -51,6 +57,12 @@ public class ApontamentoDAOImpl extends DAOImpl<Apontamento, Integer, Apontament
 	protected void applyFilter(TypedQuery<?> query, ApontamentoFilter filter) {
 		
 		super.applyFilter(query, filter);
+		
+		if (StringUtils.isNotEmpty(filter.getDescricaoLikeRight())) {
+			
+			query.setParameter("descricaoLikeRight", filter.getDescricaoLikeRight() + "%");
+			
+		}
 		
 		if (filter.getDemandaFilter() != null) {
 			

@@ -2,7 +2,6 @@
 
 * {
 	margin: 0px;
-	font-size: 15px;
 }
 
 img {
@@ -17,6 +16,14 @@ img {
 	font-weight: bold;
 }
 
-.centralizar {
+.alinharCentro {
 	text-align: center;
+}
+
+.alinharEsquerda {
+	text-align: left;
+}
+
+.alinharDireita {
+	text-align: right;
 }

@@ -23,17 +23,17 @@ public abstract class BusinessImpl<Entity extends Serializable, Id extends Seria
 	}
 
 	@Override
-	public void insert(Entity entity) {
+	public void insert(Entity entity) throws BusinessException {
 		dao.insert(entity);
 	}
 
 	@Override
-	public void update(Entity entity) {
+	public void update(Entity entity) throws BusinessException {
 		dao.update(entity);
 	}
 
 	@Override
-	public void delete(Entity entity) {
+	public void delete(Entity entity) throws BusinessException {
 		dao.delete(entity);
 	}
 

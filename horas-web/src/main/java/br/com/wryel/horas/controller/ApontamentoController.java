@@ -5,12 +5,15 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 
 import br.com.wryel.horas.business.ApontamentoBusiness;
 import br.com.wryel.horas.business.BusinessException;
 import br.com.wryel.horas.business.DemandaBusiness;
 import br.com.wryel.horas.entity.Apontamento;
 import br.com.wryel.horas.entity.Demanda;
+import br.com.wryel.horas.entity.filter.ApontamentoFilter;
+import br.com.wryel.horas.entity.filter.DemandaFilter;
 import br.com.wryel.horas.util.FacesUtil;
 import br.com.wryel.horas.util.SessionUtil;
 
@@ -23,6 +26,9 @@ public class ApontamentoController extends AbstractController<Apontamento> {
 	
 	@EJB
 	private DemandaBusiness demandaBusiness;
+	
+	@Inject
+	private ApontamentoFilter filter;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -100,7 +106,7 @@ public class ApontamentoController extends AbstractController<Apontamento> {
 
 		apontamentoBusiness.update(getBean());
 		
-		FacesUtil.getInstance().showInfo("apontamento.salvo");
+		FacesUtil.getInstance().showInfo("registro.atualizado");
 		
 		FacesUtil.getInstance().getFlashScope().put(flashListKey(), apontamentoBusiness.listApontamentosPorDemanda(demanda));
 		
@@ -120,10 +126,55 @@ public class ApontamentoController extends AbstractController<Apontamento> {
 		
 		apontamentoBusiness.insert(getBean());
 		
-		FacesUtil.getInstance().showInfo("apontamento.salvo");
+		FacesUtil.getInstance().showInfo("registro.inserido");
 		
 		FacesUtil.getInstance().getFlashScope().put(demandaController.flashEntityKey(), demanda);
 		
 		return nav(visualizarApontamentosDeDemanda());
+	}
+	
+	public String pesquisarApontamentosEmDemanda() {
+
+		DemandaController demandaController = FacesUtil.getInstance().getController(DemandaController.class);
+	
+		DemandaFilter demandaFilter = new DemandaFilter();
+		demandaFilter.setIdEquals(demandaController.getBean().getId());
+		
+		filter.setDemandaFilter(demandaFilter);
+		
+		List<Apontamento> apontamentos = apontamentoBusiness.list(filter);
+		
+		setList(apontamentos);
+		
+		return nav(visualizarApontamentosDeDemanda());
+	}
+	
+	public String voltarParaVisualizacaoDeApontamentosDeDemanda() {
+		
+		DemandaController demandaController = FacesUtil.getInstance().getController(DemandaController.class);
+		
+		Demanda demanda = demandaController.getBean();
+		
+		FacesUtil.getInstance().getFlashScope().put(demandaController.flashEntityKey(), demanda);
+		
+		List<Apontamento> apontamentos = apontamentoBusiness.listApontamentosPorDemanda(demanda);
+		
+		FacesUtil.getInstance().getFlashScope().put(flashListKey(), apontamentos);
+		
+		return nav(visualizarApontamentosDeDemanda());
+	}
+
+	/**
+	 * @return the filter
+	 */
+	public ApontamentoFilter getFilter() {
+		return filter;
+	}
+
+	/**
+	 * @param filter the filter to set
+	 */
+	public void setFilter(ApontamentoFilter filter) {
+		this.filter = filter;
 	}
 }

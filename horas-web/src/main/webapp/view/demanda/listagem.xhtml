@@ -13,15 +13,20 @@
 				</f:facet>
 				
 				<h:form>
-					<h:panelGrid columns="2">
-						<h:outputLabel value="#{msg['demanda.nome']}" />
-						<h:inputText value="#{demandaController.filter.nomeLikeRight}" />
-						<h:commandButton value="#{msg['adicionar']}" action="#{demandaController.adicionar}">
-							<f:param name="action" value="add" />
-						</h:commandButton>
-						<h:commandButton value="#{msg['pesquisar']}" action="#{demandaController.pesquisar}" />
-					</h:panelGrid>
+					<rich:panel>
+						<h:panelGrid columns="2">
+							<h:outputLabel value="#{msg['demanda.nome']}" />
+							<h:inputText value="#{demandaController.filter.nomeLikeRight}" />
+							
+							<h:commandButton value="#{msg['adicionar']}" action="#{demandaController.adicionar}">
+								<f:param name="action" value="add" />
+							</h:commandButton>
+							<h:commandButton value="#{msg['pesquisar']}" action="#{demandaController.pesquisar}" />
+						</h:panelGrid>
+					</rich:panel>
 				</h:form>
+	
+				<br />
 	
 				<h:form>
 					<rich:dataTable value="#{demandaController.list}" var="demanda" styleClass="cemPorCento">
