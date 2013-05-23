@@ -5,7 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:rich="http://richfaces.org/rich" 
 	xmlns:ui="http://java.sun.com/jsf/facelets" 
-	xmlns:a4j="http://richfaces.org/a4j">
+	xmlns:a4j="http://richfaces.org/a4j" 
+	xmlns:t="http://myfaces.apache.org/tomahawk">
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="body">
 			<rich:panel>
@@ -15,12 +16,14 @@
 				
 				<h:form>
 					<rich:panel>
-						<h:panelGrid columns="2">
+						<t:panelGrid columns="2" styleClass="cemPorCento">
 							<h:outputLabel value="#{msg['cliente.nome']}:" styleClass="negrito" />
-							<h:inputText value="#{clienteController.filter.nomeLikeRight}" />
-							<h:commandButton value="#{msg['adicionar']}" action="#{clienteController.adicionar}" />
-							<h:commandButton value="#{msg['pesquisar']}" action="#{clienteController.pesquisar}" />
-						</h:panelGrid>
+							<h:inputText value="#{clienteController.filter.nomeLikeRight}" styleClass="inputTexto" />
+							<t:panelGroup styleClass="alinharDireita" colspan="2">
+								<h:commandButton value="#{msg['adicionar']}" action="#{clienteController.adicionar}" />
+								<h:commandButton value="#{msg['pesquisar']}" action="#{clienteController.pesquisar}" />
+							</t:panelGroup>
+						</t:panelGrid>
 					</rich:panel>
 				</h:form>
 	

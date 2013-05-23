@@ -27,3 +27,8 @@ img {
 .alinharDireita {
 	text-align: right;
 }
+
+.inputTexto {
+	width: 200px;
+	font-size: 16px;
+}
