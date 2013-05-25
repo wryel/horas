@@ -30,5 +30,12 @@ img {
 
 .inputTexto {
 	width: 200px;
-	font-size: 16px;
+}
+
+.colunaLabel {
+	width: 120px;
+}
+
+.linhaBotoes input[type="submit"] {
+	margin-right: 5px;
 }

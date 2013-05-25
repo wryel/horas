@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html 
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:f="http://java.sun.com/jsf/core" 
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:rich="http://richfaces.org/rich" 
 	xmlns:ui="http://java.sun.com/jsf/facelets" 
@@ -16,19 +16,19 @@
 				
 				<h:form>
 					<rich:panel>
-						<t:panelGrid columns="2" styleClass="cemPorCento">
+						<t:panelGrid columns="2" styleClass="cemPorCento" columnClasses="colunaLabel">
 							<h:outputLabel value="#{msg['cliente.nome']}:" styleClass="negrito" />
 							<h:inputText value="#{clienteController.filter.nomeLikeRight}" styleClass="inputTexto" />
-							<t:panelGroup styleClass="alinharDireita" colspan="2">
+							<t:panelGroup styleClass="alinharDireita linhaBotoes" colspan="2">
 								<h:commandButton value="#{msg['adicionar']}" action="#{clienteController.adicionar}" />
 								<h:commandButton value="#{msg['pesquisar']}" action="#{clienteController.pesquisar}" />
 							</t:panelGroup>
 						</t:panelGrid>
 					</rich:panel>
 				</h:form>
-	
+
 				<br />
-	
+
 				<h:form>
 
 					<rich:popupPanel id="confirmarDelecao" domElementAttachment="form" resizeable="false">

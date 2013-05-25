@@ -12,32 +12,11 @@
 	<artifactId>horas-ear</artifactId>
 	<packaging>ear</packaging>
 	<dependencies>
-	    <!-- 
-	    <dependency>
-			<groupId>org.richfaces.core</groupId>
-			<artifactId>richfaces-core-api</artifactId>
-			<version>4.3.0.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.richfaces.core</groupId>
-			<artifactId>richfaces-core-impl</artifactId>
-			<version>4.3.0.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.richfaces.ui</groupId>
-	        <artifactId>richfaces-components-ui</artifactId>
-			<version>4.3.0.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.richfaces.ui</groupId>
-	        <artifactId>richfaces-components-api</artifactId>
-			<version>4.3.0.Final</version>
-		</dependency>
-		-->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.8.3</version>
+			<type>jar</type>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
@@ -48,6 +27,7 @@
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 			<version>3.2.1</version>
+			<type>jar</type>
 		</dependency>
 		<dependency>
 			<groupId>br.com.wryel</groupId>

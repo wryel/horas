@@ -69,7 +69,7 @@ public final class DAOHelper {
 	 * @param bean bean
 	 * @return object
 	 */
-	static Object getKey(final Object bean) {
+	public static Object getKey(final Object bean) {
 		try {
 			List<Field> fields = getField(bean, Id.class);
 			if (fields.isEmpty()) {

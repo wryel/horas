@@ -7,8 +7,10 @@ import javax.inject.Inject;
 
 import br.com.wryel.horas.business.BusinessException;
 import br.com.wryel.horas.business.ProjetoBusiness;
+import br.com.wryel.horas.entity.Cliente;
 import br.com.wryel.horas.entity.Projeto;
 import br.com.wryel.horas.entity.filter.ProjetoFilter;
+import br.com.wryel.horas.exception.HorasRuntimeException;
 import br.com.wryel.horas.util.FacesUtil;
 
 @ManagedBean
@@ -71,12 +73,71 @@ public class ProjetoController extends AbstractController<Projeto> {
 	}
 	
 	public String adicionar() {
+		
+		FacesUtil.getInstance().getFlashScope().put(ACTION, ACTION_ADD);
+		
 		FacesUtil.getInstance().getFlashScope().put(flashEntityKey(), new Projeto());
-		return nav(entrada()) + "?action=add";
+		
+		return nav(entrada());
 	}
 	
-	public String salvarAdicionar() throws BusinessException {
-		projetoBusiness.insert(getBean());
+	public String editar() {
+		
+		FacesUtil.getInstance().getFlashScope().put(ACTION, ACTION_EDIT);
+		
+		FacesUtil.getInstance().getFlashScope().put(flashEntityKey(), getBean());
+		
+		ClienteController clienteController = FacesUtil.getInstance().getController(ClienteController.class);
+		
+		FacesUtil.getInstance().getFlashScope().put(clienteController.flashEntityKey(), getBean().getCliente());
+		
+		return nav(entrada());
+	}
+	
+	public String deletar() {
+		try {
+			projetoBusiness.delete(getBean());
+			FacesUtil.getInstance().showInfo("registro.deletado");	
+			getList().remove(getBean());			
+		} catch (BusinessException businessException) {
+			FacesUtil.getInstance().showBusinessError(businessException.getMessage());
+		}
+		return nav(listagem());
+	}
+	
+	public String salvar() {
+		
+		ClienteController clienteController = FacesUtil.getInstance().getController(ClienteController.class);
+		
+		Cliente cliente = clienteController.getBean();
+		
+		getBean().setCliente(cliente);
+		
+		try {
+			
+			if (ACTION_ADD.equals(getAction())) {
+				
+				projetoBusiness.insert(getBean());
+				
+				FacesUtil.getInstance().showInfo("registro.inserido");
+				
+			} else if (ACTION_EDIT.equals(getAction())) {
+				
+				projetoBusiness.update(getBean());
+				
+				FacesUtil.getInstance().showInfo("registro.atualizado");
+				
+			} else {
+				
+				throw new HorasRuntimeException();
+				
+			}
+
+		} catch (BusinessException businessException) {
+			FacesUtil.getInstance().showBusinessError(businessException.getMessage());
+			return nav(entrada());
+		}
+		
 		return nav(listagem());
 	}
 }

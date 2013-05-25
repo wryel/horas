@@ -1,14 +1,14 @@
 <jboss-deployment-structure>
-    <ear-subdeployments-isolated>false</ear-subdeployments-isolated>
-    <deployment>
-        <resources>
-            <resource-root path="commons-beanutils-1.8.3.jar" />
-            <resource-root path="commons-collections-3.2.1.jar" />
-            <resource-root path="commons-lang-2.6.jar" />
-            <resource-root path="commons-logging-1.1.1.jar" />
-            <resource-root path="horas-core-domain-0.0.1-SNAPSHOT.jar" />
-        </resources>
-    </deployment>
-    <sub-deployment name="horas-core-0.0.1-SNAPSHOT.jar" />
-    <sub-deployment name="horas-web-0.0.1-SNAPSHOT.war" />
+	<ear-subdeployments-isolated>false</ear-subdeployments-isolated>
+	<deployment>
+		<resources>
+			<resource-root path="commons-beanutils-1.8.3.jar" />
+			<resource-root path="commons-collections-3.2.1.jar" />
+			<resource-root path="commons-lang-2.6.jar" />
+			<resource-root path="commons-logging-1.1.1.jar" />
+			<resource-root path="horas-core-domain-0.0.1-SNAPSHOT.jar" />
+		</resources>
+	</deployment>
+	<sub-deployment name="horas-core-0.0.1-SNAPSHOT.jar" />
+	<sub-deployment name="horas-web-0.0.1-SNAPSHOT.war" />
 </jboss-deployment-structure>

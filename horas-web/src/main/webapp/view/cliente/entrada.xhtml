@@ -4,23 +4,29 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:rich="http://richfaces.org/rich" 
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:t="http://myfaces.apache.org/tomahawk">
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="body">		
 			<rich:panel>
 				<f:facet name="header">
 					<h:outputText value="#{msg['cliente']}" />
 				</f:facet>
-				<h:form>
-					<h:panelGrid columns="2">
-						<h:outputLabel for="nome" value="#{msg['cliente.nome']}" styleClass="negrito" />
-						<h:inputText id="nome" value="#{clienteController.bean.nome}" />
-					</h:panelGrid>
-					<h:panelGrid>
-						<h:commandButton action="#{clienteController.salvarAdicionar}" value="#{msg['adicionar']}" rendered="#{clienteController.action == 'add'}" />
-						<h:commandButton action="#{clienteController.salvarEditar}" value="#{msg['editar']}" rendered="#{clienteController.action == 'edit'}" />
-					</h:panelGrid>
-				</h:form>
+				
+				<rich:panel>
+					<h:form>
+						<t:panelGrid columns="2" columnClasses="colunaLabel" styleClass="cemPorCento">
+							<h:outputLabel for="nome" value="#{msg['cliente.nome']}:" styleClass="negrito" />
+							<h:inputText id="nome" value="#{clienteController.bean.nome}" styleClass="inputTexto" />
+							<t:panelGroup colspan="2" styleClass="alinharDireita linhaBotoes">
+								<h:commandButton action="#{clienteController.listagem}" value="#{msg['voltar']}" />
+								<h:commandButton action="#{clienteController.salvarAdicionar}" value="#{msg['adicionar']}" rendered="#{clienteController.action == 'add'}" />
+								<h:commandButton action="#{clienteController.salvarEditar}" value="#{msg['editar']}" rendered="#{clienteController.action == 'edit'}" />
+							</t:panelGroup>
+						</t:panelGrid>
+					</h:form>
+
+				</rich:panel>
 			</rich:panel>						
 		</ui:define>
 	</ui:composition>

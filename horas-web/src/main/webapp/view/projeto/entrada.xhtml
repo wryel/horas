@@ -4,23 +4,38 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:rich="http://richfaces.org/rich" 
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:t="http://myfaces.apache.org/tomahawk">
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="body">
 			<rich:panel>
-				<h:form>
-					<!-- INICIO PROJETO -->
-					<h:panelGrid columns="2">
-						<h:outputText value="#{msg['projeto.nome']}" />
-						<h:inputText value="#{projetoController.bean.nome}" />
-						<h:outputText value="#{msg['cliente']}" />
-						<h:selectOneMenu value="#{projetoController.bean.cliente}" converter="clienteConverter">
-							<f:selectItems value="#{comboController.clientes}" />
-						</h:selectOneMenu>
-					</h:panelGrid>
-					<!-- FIM PROJETO -->
-					<h:commandButton action="#{projetoController.salvarAdicionar}" value="#{msg['adicionar']}" />
-				</h:form>
+				<f:facet name="header">
+					<h:outputText value="#{msg['projeto']}" />
+				</f:facet>
+				
+				<rich:panel>
+					<h:form>
+						<!-- INICIO PROJETO -->
+						<t:panelGrid columns="2" columnClasses="colunaLabel" styleClass="cemPorCento">
+							<h:outputText value="#{msg['projeto.nome']}:" styleClass="negrito" />
+							<h:inputText value="#{projetoController.bean.nome}" styleClass="inputTexto" />
+							
+							<h:outputText value="#{msg['cliente']}:" styleClass="negrito" />
+							<h:selectOneMenu value="#{clienteController.bean}" converter="clienteConverter" styleClass="inputTexto">
+								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
+								<f:selectItems value="#{comboController.clientes}" />
+							</h:selectOneMenu>
+							
+							<t:panelGroup colspan="2" styleClass="alinharDireita linhaBotoes">
+								<h:commandButton action="#{projetoController.listagem}" value="#{msg['voltar']}" />
+								<h:commandButton action="#{projetoController.salvar}" value="#{msg['adicionar']}" rendered="#{projetoController.action == 'add'}" />
+								<h:commandButton action="#{projetoController.salvar}" value="#{msg['editar']}" rendered="#{projetoController.action == 'edit'}" />
+							</t:panelGroup>
+						</t:panelGrid>
+						<!-- FIM PROJETO -->
+					</h:form>
+				</rich:panel>
+				
 			</rich:panel>
 		</ui:define>
 	</ui:composition>

@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html 
 	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j" 
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:rich="http://richfaces.org/rich" 
+	xmlns:t="http://myfaces.apache.org/tomahawk"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="body">
@@ -14,22 +16,43 @@
 				
 				<h:form>
 					<rich:panel>					
-						<h:panelGrid columns="2">
-							<h:outputLabel value="#{msg['projeto.nome']}" />
-							<h:inputText value="#{projetoController.filter.nomeLikeRight}" />
-							<h:commandButton value="#{msg['adicionar']}" action="#{projetoController.adicionar}">
-								<f:viewParam name="action" value="add" />
-							</h:commandButton>
-							<h:commandButton value="#{msg['pesquisar']}" action="#{projetoController.pesquisar}" />
-						</h:panelGrid>
+						<t:panelGrid columns="2" styleClass="cemPorCento" columnClasses="colunaLabel">
+							<h:outputLabel value="#{msg['projeto.nome']}:" styleClass="negrito" />
+							<h:inputText value="#{projetoController.filter.nomeLikeRight}" styleClass="inputTexto" />
+							<t:panelGroup styleClass="alinharDireita linhaBotoes" colspan="2">
+								<h:commandButton value="#{msg['adicionar']}" action="#{projetoController.adicionar}" />
+								<h:commandButton value="#{msg['pesquisar']}" action="#{projetoController.pesquisar}" />
+							</t:panelGroup>
+						</t:panelGrid>
 					</rich:panel>
 				</h:form>
 				
 				<br />
 		
 				<h:form>
+					
+					<rich:popupPanel id="confirmarDelecao" domElementAttachment="form" resizeable="false">
+						<f:facet name="header">
+							<h:outputText value="#{msg['confirme']}" />
+						</f:facet>
+						<f:facet name="controls">
+				            <h:outputLink value="#" onclick="#{rich:component('confirmarDelecao')}.hide(); return false;">
+				                <h:outputText value="X" />
+				            </h:outputLink>
+				        </f:facet>
+						<h:outputFormat value="#{msg['projeto.confirmarDelecao']}">
+							<f:param value="#{projetoController.bean.nome}" />
+						</h:outputFormat>
+						<t:panelGrid columns="1" styleClass="cemPorCento">
+							<t:panelGroup styleClass="alinharDireita linhaBotoes">
+								<h:commandButton value="#{msg['cancelar']}" type="button" onclick="#{rich:component('confirmarDelecao')}.hide();" />
+								<h:commandButton action="#{projetoController.deletar}" value="#{msg['deletar']}" />
+							</t:panelGroup>
+						</t:panelGrid>
+					</rich:popupPanel>
+				
 					<rich:dataTable value="#{projetoController.list}" var="projeto" styleClass="cemPorCento">
-						<rich:column>
+						<rich:column styleClass="negrito alinharCentro">
 							<f:facet name="header">
 								<h:outputText value="#{msg['projeto.id']}" />
 							</f:facet>
@@ -43,11 +66,31 @@
 							<h:outputText value="#{projeto.nome}" />
 						</rich:column>
 						
-						<rich:column>
+						<rich:column styleClass="alinharCentro">
 							<f:facet name="header">
 								<h:outputText value="#{msg['cliente']}" />
 							</f:facet>
 							<h:outputText value="#{projeto.cliente.nome}" />
+						</rich:column>
+						
+						<rich:column styleClass="alinharCentro">
+							<f:facet name="header">
+								<h:outputText value="#{msg['deletar']}" />
+							</f:facet>
+							<a4j:commandLink render="confirmarDelecao" oncomplete="#{rich:component('confirmarDelecao')}.show()">
+								<f:setPropertyActionListener target="#{projetoController.bean}" value="#{projeto}" />
+								<h:graphicImage url="/resources/imagem/deletar.png" width="16" height="16" />								
+							</a4j:commandLink>							
+						</rich:column>
+						
+						<rich:column styleClass="alinharCentro">
+							<f:facet name="header">
+								<h:outputText value="#{msg['editar']}" />
+							</f:facet>
+							<h:commandLink action="#{projetoController.editar}">
+								<f:setPropertyActionListener target="#{projetoController.bean}" value="#{projeto}" />
+								<h:graphicImage url="/resources/imagem/editar.png" width="16" height="16" />
+							</h:commandLink>
 						</rich:column>
 					</rich:dataTable>
 				</h:form>

@@ -70,10 +70,10 @@ public final class FacesUtil {
 		return httpSession;
 	}
 
-	private ResourceBundle getResourceBundle() {
-		ResourceBundle resourceBundle = getFacesContext().getApplication().getResourceBundle(getFacesContext(), "msg");
-		return resourceBundle;
-	}
+//	private ResourceBundle getResourceBundle() {
+//		ResourceBundle resourceBundle = getFacesContext().getApplication().getResourceBundle(getFacesContext(), "msg");
+//		return resourceBundle;
+//	}
 	
 	private ResourceBundle getResourceBundleMessages() {
 		ResourceBundle resourceBundle = getFacesContext().getApplication().getResourceBundle(getFacesContext(), "messages");

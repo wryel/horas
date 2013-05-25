@@ -16,6 +16,30 @@ public class ProjetoBusinessImpl extends BusinessImpl<Projeto, Long, ProjetoFilt
 	public ProjetoBusinessImpl() {
 		super(Projeto.class);
 	}
+	
+	@Override
+	public void update(Projeto projeto) throws BusinessException {
+		
+		if (projeto.getCliente() == null) {
+			
+			throw new BusinessException("Não é possivel ter um projeto sem um cliente associado");
+			
+		}
+		
+		super.update(projeto);
+	}
+	
+	@Override
+	public void insert(Projeto projeto) throws BusinessException {
+
+		if (projeto.getCliente() == null) {
+			
+			throw new BusinessException("Não é possivel ter um projeto sem um cliente associado");
+		
+		}
+		
+		super.insert(projeto);
+	}
 
 	@Override
 	@EJB
