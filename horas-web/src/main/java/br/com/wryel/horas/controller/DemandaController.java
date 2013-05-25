@@ -51,8 +51,9 @@ public class DemandaController extends AbstractController<Demanda> {
 	}
 	
 	public String adicionar() {
+		FacesUtil.getInstance().getFlashScope().put(ACTION, ACTION_ADD);
 		FacesUtil.getInstance().getFlashScope().put(flashEntityKey(), new Demanda());
-		return nav(entrada()) + "? action=add";
+		return nav(entrada());
 	}
 	
 	public String salvar() throws BusinessException {
@@ -88,7 +89,6 @@ public class DemandaController extends AbstractController<Demanda> {
 			return nav(entrada());
 		}		
 		
-		demandaBusiness.insert(getBean());
 		return nav(listagem());
 	}
 	

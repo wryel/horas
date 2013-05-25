@@ -22,15 +22,27 @@ public abstract class BusinessImpl<Entity extends Serializable, Id extends Seria
 		Entity entity = dao.get(id);
 		return entity;
 	}
+	
+	protected boolean validateInsert(Entity entity) throws BusinessException {
+		return true;
+	}
 
 	@Override
 	public void insert(Entity entity) throws BusinessException {
-		dao.insert(entity);
+		if (validateInsert(entity)) {
+			dao.insert(entity);			
+		}
+	}
+	
+	protected boolean validateUpdate(Entity entity) throws BusinessException {
+		return true;
 	}
 
 	@Override
 	public void update(Entity entity) throws BusinessException {
-		dao.update(entity);
+		if (validateUpdate(entity)) {
+			dao.update(entity);			
+		}
 	}
 
 	@Override

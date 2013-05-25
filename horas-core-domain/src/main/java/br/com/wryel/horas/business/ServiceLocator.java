@@ -6,7 +6,7 @@ import javax.naming.NamingException;
 
 import br.com.wryel.horas.exception.HorasRuntimeException;
 
-public class ServiceLocator {
+public final class ServiceLocator {
 
 	private static final ServiceLocator INSTANCE = new ServiceLocator();
 	

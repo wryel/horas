@@ -3,7 +3,7 @@ package br.com.wryel.horas.util;
 import br.com.wryel.horas.AppContext;
 import br.com.wryel.horas.entity.Usuario;
 
-public class SessionUtil {
+public final class SessionUtil {
 	
 	private static final SessionUtil INSTANCE = new SessionUtil();
 	

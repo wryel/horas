@@ -13,6 +13,26 @@ public class DemandaBusinessImpl extends BusinessImpl<Demanda, Long, DemandaFilt
 	public DemandaBusinessImpl() {
 		super(Demanda.class);
 	}
+	
+	@Override
+	protected boolean validateInsert(Demanda demanda) throws BusinessException {
+		
+		if (demanda.getProjeto() == null) {
+			throw new BusinessException("Uma demanda deve estar associada a um projeto");
+		}
+		
+		return true;
+	}
+	
+	@Override
+	protected boolean validateUpdate(Demanda demanda) throws BusinessException {
+
+		if (demanda.getProjeto() == null) {
+			throw new BusinessException("Uma demanda deve estar associada a um projeto");
+		}
+		
+		return true;
+	}
 
 	@EJB
 	@Override

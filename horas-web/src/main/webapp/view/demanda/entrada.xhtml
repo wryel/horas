@@ -4,31 +4,48 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:rich="http://richfaces.org/rich" 
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:t="http://myfaces.apache.org/tomahawk">
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="body">
 		
 			<h:form>
-				<h:panelGrid columns="2">
-					<h:outputText value="#{msg['demanda.nome']}" />
-					<h:inputText value="#{demandaController.bean.nome}" />
+				
+				<rich:panel>
+					<f:facet name="header">
+						<h:outputText value="#{msg['demanda']}" />
+					</f:facet>
 					
-					<h:outputText value="#{msg['cliente']}" />
-					<h:selectOneMenu value="#{clienteController.bean}" converter="clienteConverter">
-						<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
-						<f:selectItems value="#{comboController.clientes}" />
-						<f:ajax listener="#{demandaController.mudouClienteEvento}" event="change" render="projeto" execute="@this" />
-					</h:selectOneMenu>
+					<rich:panel>
+						<t:panelGrid columns="2" columnClasses="colunaLabel" styleClass="cemPorCento">
+							<h:outputText value="#{msg['demanda.nome']}:" styleClass="negrito" />
+							<h:inputText value="#{demandaController.bean.nome}" styleClass="inputTexto" />
+							
+							<h:outputText value="#{msg['cliente']}:" styleClass="negrito" />
+							<h:selectOneMenu value="#{clienteController.bean}" converter="clienteConverter" styleClass="inputTexto">
+								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
+								<f:selectItems value="#{comboController.clientes}" />
+								<f:ajax listener="#{demandaController.mudouClienteEvento}" event="change" render="projeto" execute="@this" />
+							</h:selectOneMenu>
+							
+							<h:outputText value="#{msg['projeto']}:" styleClass="negrito" />
+							<h:selectOneMenu value="#{projetoController.bean}" id="projeto" converter="projetoConverter" styleClass="inputTexto">
+								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
+								<f:selectItems value="#{projetoController.listAsSelectItems}" />
+							</h:selectOneMenu>
+							
+							<t:panelGroup colspan="2" styleClass="alinharDireita linhaBotoes">
+								<h:commandButton action="#{demandaController.listagem}" value="#{msg['voltar']}" />
+								<h:commandButton action="#{demandaController.salvar}" value="#{msg['adicionar']}" rendered="#{clienteController.action == 'add'}" />
+								<h:commandButton action="#{demandaController.salvar}" value="#{msg['editar']}" rendered="#{clienteController.action == 'edit'}" />
+							</t:panelGroup>
+						</t:panelGrid>						
+					</rich:panel>
 					
-					<h:outputText value="#{msg['projeto']}" />
-					<h:selectOneMenu value="#{demandaController.bean.projeto}" id="projeto" converter="projetoConverter">
-						<f:selectItems value="#{projetoController.listAsSelectItems}" />
-					</h:selectOneMenu>
-					
-				</h:panelGrid>
-				<h:commandButton action="#{demandaController.salvar}" value="#{msg['adicionar']}" />
+				</rich:panel>
+		
 			</h:form>
-
+			
 		</ui:define>
 	</ui:composition>
 </html>
