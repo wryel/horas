@@ -4,7 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:rich="http://richfaces.org/rich" 
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:t="http://myfaces.apache.org/tomahawk">
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="body">
 			<rich:panel>
@@ -14,21 +15,23 @@
 			
 				<h:form>
 					<rich:panel>
-						<h:panelGrid columns="2">
-							<h:outputLabel value="#{msg['demanda']}:" for="demanda" />
-							<h:inputText id="demanda" value="#{demandaController.filter.nomeLikeRight}" />
+						<t:panelGrid columns="2" styleClass="cemPorCento" columnClasses="colunaLabel">
+							<h:outputLabel value="#{msg['demanda']}:" for="demanda" styleClass="negrito" />
+							<h:inputText id="demanda" value="#{demandaController.filter.nomeLikeRight}" styleClass="inputTexto" />
 							
-							<h:outputLabel value="#{msg['projeto']}:" for="projeto" />
-							<h:inputText id="projeto" />
+							<h:outputLabel value="#{msg['projeto']}:" for="projeto" styleClass="negrito" />
+							<h:inputText id="projeto" styleClass="inputTexto" />
 							
-							<h:outputLabel value="#{msg['cliente']}:" for="cliente" />
-							<h:selectOneMenu id="cliente">
+							<h:outputLabel value="#{msg['cliente']}:" for="cliente" styleClass="negrito" />
+							<h:selectOneMenu id="cliente" styleClass="inputTexto">
 								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
 								<f:selectItems value="#{comboController.clientes}" />
 							</h:selectOneMenu>
 							
-							<h:commandButton value="#{msg['pesquisar']}" action="#{apontamentoController.pesquisarDemandas}" />
-						</h:panelGrid>
+							<t:panelGroup styleClass="alinharDireita linhaBotoes" colspan="2">
+								<h:commandButton value="#{msg['pesquisar']}" action="#{apontamentoController.pesquisarDemandas}" />
+							</t:panelGroup>							
+						</t:panelGrid>
 					</rich:panel>
 				</h:form>
 				

@@ -15,5 +15,11 @@ public class UsuarioController extends AbstractController<Usuario> {
 		super(Usuario.class);
 	}
 	
+	public String listagem() {
+		return Navegacao.Usuario.LISTAGEM;
+	}
 	
+	public String entrada() {
+		return Navegacao.Usuario.ENTRADA;
+	}
 }

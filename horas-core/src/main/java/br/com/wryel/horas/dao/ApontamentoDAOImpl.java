@@ -1,12 +1,16 @@
 package br.com.wryel.horas.dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 
 import br.com.wryel.horas.entity.Apontamento;
 import br.com.wryel.horas.entity.Demanda;
@@ -43,6 +47,38 @@ public class ApontamentoDAOImpl extends DAOImpl<Apontamento, Integer, Apontament
 				
 			}
 			
+			if (filter.getDemandaFilter().getProjetoFilter() != null) {
+				
+				if (filter.getDemandaFilter().getProjetoFilter().getIdEquals() != null) {
+					
+					wheres.add("a.demanda.projeto.id = :demandaProjetoId");
+					
+				}
+				
+				if (filter.getDemandaFilter().getProjetoFilter().getClienteFilter() != null) {
+					
+					if (filter.getDemandaFilter().getProjetoFilter().getClienteFilter().getIdEquals() != null) {
+						
+						wheres.add("a.demanda.projeto.cliente.id = :demandaProjetoClienteId");
+						
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		if (filter.getInicioGreatherOrEqualsThan() != null) {
+			
+			wheres.add("a.inicio >= :inicioGreatherOrEqualsThan");
+			
+		}
+		
+		if (filter.getFimLowerOrEqualsThan() != null) {
+			
+			wheres.add("a.fim <= :fimLowerOrEqualsThan");
+			
 		}
 		
 		if (!wheres.isEmpty()) {
@@ -71,6 +107,44 @@ public class ApontamentoDAOImpl extends DAOImpl<Apontamento, Integer, Apontament
 				query.setParameter("demandaIdEquals", filter.getDemandaFilter().getIdEquals());
 				
 			}
+			
+			if (filter.getDemandaFilter().getProjetoFilter() != null) {
+				
+				if (filter.getDemandaFilter().getProjetoFilter().getIdEquals() != null) {
+					
+					query.setParameter("demandaProjetoId", filter.getDemandaFilter().getProjetoFilter().getIdEquals());
+					
+				}
+				
+				if (filter.getDemandaFilter().getProjetoFilter().getClienteFilter() != null) {
+					
+					if (filter.getDemandaFilter().getProjetoFilter().getClienteFilter().getIdEquals() != null) {
+						
+						query.setParameter("demandaProjetoClienteId", filter.getDemandaFilter().getProjetoFilter().getClienteFilter().getIdEquals());
+						
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		if (filter.getInicioGreatherOrEqualsThan() != null) {
+			
+			Date inicioGreatherOrEqualsThan = filter.getInicioGreatherOrEqualsThan();
+			inicioGreatherOrEqualsThan = DateUtils.truncate(inicioGreatherOrEqualsThan, Calendar.DAY_OF_MONTH);
+			
+			query.setParameter("inicioGreatherOrEqualsThan", inicioGreatherOrEqualsThan, TemporalType.DATE);
+			
+		}
+		
+		if (filter.getFimLowerOrEqualsThan() != null) {
+			
+			Date fimLowerOrEqualsThan = filter.getFimLowerOrEqualsThan();
+			fimLowerOrEqualsThan = DateUtils.truncate(fimLowerOrEqualsThan, Calendar.DAY_OF_MONTH);
+			
+			query.setParameter("fimLowerOrEqualsThan", fimLowerOrEqualsThan, TemporalType.DATE);
 			
 		}
 		

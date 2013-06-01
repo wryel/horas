@@ -35,6 +35,8 @@ public class Usuario implements Serializable {
 	
 	private String ativo;
 	
+	private String tipo = "A";
+	
 	public Usuario() {
 		
 	}
@@ -97,6 +99,20 @@ public class Usuario implements Serializable {
 
 	public void setAtivo(String ativo) {
 		this.ativo = ativo;
+	}
+
+	/**
+	 * @return the tipo
+	 */
+	public String getTipo() {
+		return tipo;
+	}
+
+	/**
+	 * @param tipo the tipo to set
+	 */
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	/* (non-Javadoc)

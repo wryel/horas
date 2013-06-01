@@ -25,4 +25,8 @@
 	    <converter-id>projetoConverter</converter-id>
 	    <converter-class>br.com.wryel.horas.converter.ProjetoConverter</converter-class>
 	</converter>
+	<converter>
+	    <converter-id>demandaConverter</converter-id>
+	    <converter-class>br.com.wryel.horas.converter.DemandaConverter</converter-class>
+	</converter>
 </faces-config>

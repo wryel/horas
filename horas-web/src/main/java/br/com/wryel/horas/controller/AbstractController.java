@@ -34,7 +34,7 @@ public abstract class AbstractController<Bean extends Serializable> implements S
 	
 	@PostConstruct
 	@SuppressWarnings("unchecked")
-	public void debugConstruct() {
+	public void postConstruct() {
 		System.out.println("Criando instancia de " + getClass().getSimpleName());
 		if (FacesUtil.getInstance().getFlashScope().containsKey(flashEntityKey())) {
 			setBean(beanClass.cast(FacesUtil.getInstance().getFlashScope().get(flashEntityKey())));
@@ -48,7 +48,7 @@ public abstract class AbstractController<Bean extends Serializable> implements S
 	}
 	
 	@PreDestroy
-	public void debugPreDestroy() {
+	public void preDestroy() {
 		System.out.println("Removendo instancia de " + getClass().getSimpleName());
 	}
 	

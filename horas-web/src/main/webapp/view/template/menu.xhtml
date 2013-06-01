@@ -1,11 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html 
 	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:f="http://java.sun.com/jsf/core" 
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:rich="http://richfaces.org/rich">
 	<h:form>			
 		<rich:panelMenu>
-			<rich:panelMenuGroup expanded="true">
+			<rich:panelMenuGroup expanded="true" label="#{msg['menu']}">
 				<rich:panelMenuItem leftIcon="/resources/imagem/cliente.png"> 
 					<h:commandLink action="#{clienteController.listagem}">
 						<h:outputText value="#{msg['cliente']}" />
@@ -22,8 +23,15 @@
 					</h:commandLink>
 				</rich:panelMenuItem>
 				<rich:panelMenuItem leftIcon="/resources/imagem/apontamento.png"> 
-					<h:commandLink action="#{apontamentoController.pesquisarDemandaParaLancarApontamento}">
+					<h:commandLink action="#{apontamentoController.listagem}">
 						<h:outputText value="#{msg['apontamento']}" />
+					</h:commandLink>
+				</rich:panelMenuItem>
+			</rich:panelMenuGroup>
+			<rich:panelMenuGroup expanded="true" label="#{msg['administracao']}" rendered="#{sessionScope['usuario'].tipo == 'A'}">
+				<rich:panelMenuItem leftIcon="/resources/imagem/usuario.png">
+					<h:commandLink action="#{usuarioController.listagem}">
+						<h:outputText value="#{msg['usuario']}" />
 					</h:commandLink>
 				</rich:panelMenuItem>
 			</rich:panelMenuGroup>

@@ -33,6 +33,15 @@ public final class Navegacao {
 		
 		public String ENTRADA = "/view/apontamento/entrada";
 		
+		public String LISTAGEM = "/view/apontamento/listagem";
+		
+	}
+	
+	public interface Usuario {
+		
+		public String LISTAGEM = "/view/usuario/listagem";
+		
+		public String ENTRADA = "/view/usuario/entrada";
 	}
 	
 	private Navegacao() {

@@ -8,7 +8,7 @@ import br.com.wryel.horas.entity.Usuario;
 import br.com.wryel.horas.entity.filter.UsuarioFilter;
 
 @Stateless
-public class UsuarioBusinessImpl extends BusinessImpl<Usuario, Integer, UsuarioFilter, UsuarioDAO> {
+public class UsuarioBusinessImpl extends BusinessImpl<Usuario, Integer, UsuarioFilter, UsuarioDAO> implements UsuarioBusiness {
 
 	public UsuarioBusinessImpl() {
 		super(Usuario.class);

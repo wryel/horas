@@ -8,6 +8,8 @@ import br.com.wryel.horas.entity.Projeto;
 public class ProjetoFilter extends EntityFilter<Projeto> {
 
 	private static final long serialVersionUID = 1L;
+
+	private Long idEquals;
 	
 	private String nomeLikeRight;
 
@@ -39,5 +41,19 @@ public class ProjetoFilter extends EntityFilter<Projeto> {
 	 */
 	public void setClienteFilter(ClienteFilter clienteFilter) {
 		this.clienteFilter = clienteFilter;
+	}
+
+	/**
+	 * @return the idEquals
+	 */
+	public Long getIdEquals() {
+		return idEquals;
+	}
+
+	/**
+	 * @param idEquals the idEquals to set
+	 */
+	public void setIdEquals(Long idEquals) {
+		this.idEquals = idEquals;
 	}
 }

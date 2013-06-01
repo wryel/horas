@@ -1,39 +1,51 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html 
 	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:f="http://java.sun.com/jsf/core" 
 	xmlns:h="http://java.sun.com/jsf/html" 
-	xmlns:rich="http://richfaces.org/rich">
-	<h:head />
-	<f:view>
-		<h:body>
-		
-			<h:form>
-				<h:panelGrid columns="2">
-					<h:outputLabel value="#{msg['cliente.nome']}" />
-					<h:inputText value="#{clienteController.filter.nomeLikeRight}" />
-					<h:commandButton value="#{msg['adicionar']}" action="#{clienteController.adicionar}" />
-					<h:commandButton value="#{msg['pesquisar']}" action="#{clienteController.pesquisar}" />
-				</h:panelGrid>
-			</h:form>
-
-			<h:form>
-				<rich:dataTable value="#{clienteController.list}" var="cliente">
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText value="#{msg['cliente.id']}" />
-						</f:facet>
-						<h:outputText value="#{cliente.id}" />
-					</rich:column>
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText value="#{msg['cliente.nome']}" />
-						</f:facet>
-						<h:outputText value="#{cliente.nome}" />
-					</rich:column>
-				</rich:dataTable>
-			</h:form>
-			
-		</h:body>
-	</f:view>	
+	xmlns:rich="http://richfaces.org/rich" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<ui:composition template="/view/template/template.xhtml">
+		<ui:define name="body">		
+			<rich:panel>
+				<f:facet name="header">
+					<h:outputText value="#{msg['usuario']}" />
+				</f:facet>
+				
+				<rich:panel>
+					<h:form>
+						<t:panelGrid columns="2" styleClass="cemPorCento" columnClasses="colunaLabel">
+							<h:outputLabel value="#{msg['cliente.nome']}:" styleClass="negrito" />
+							<h:inputText value="#{clienteController.filter.nomeLikeRight}" />
+							<t:panelGroup styleClass="alinharDireita linhaBotoes" colspan="2">
+								<h:commandButton value="#{msg['adicionar']}" action="#{clienteController.adicionar}" />
+								<h:commandButton value="#{msg['pesquisar']}" action="#{clienteController.pesquisar}" />
+							</t:panelGroup>
+						</t:panelGrid>
+					</h:form>
+				</rich:panel>
+						
+				<br />	
+					
+				<h:form>
+					<rich:dataTable value="#{clienteController.list}" var="cliente" styleClass="cemPorCento">
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['cliente.id']}" />
+							</f:facet>
+							<h:outputText value="#{cliente.id}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['cliente.nome']}" />
+							</f:facet>
+							<h:outputText value="#{cliente.nome}" />
+						</rich:column>
+					</rich:dataTable>
+				</h:form>				
+				
+			</rich:panel>
+		</ui:define>
+	</ui:composition>
 </html>

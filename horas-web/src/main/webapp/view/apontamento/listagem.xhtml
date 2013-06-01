@@ -1,41 +1,62 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html 
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:f="http://java.sun.com/jsf/core" 
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:rich="http://richfaces.org/rich" 
 	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:a4j="http://richfaces.org/a4j" 
 	xmlns:t="http://myfaces.apache.org/tomahawk">
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="body">
-				<rich:panel>
-					<f:facet name="header">
-						<h:outputText value="#{msg['apontamento']} - #{demandaController.bean.nome}" />
-					</f:facet>
-
-					<h:form>
-						<rich:panel>
-							<t:panelGrid columns="2" styleClass="cemPorCento" columnClasses="colunaLabel">
-								<h:outputLabel for="descricao" value="#{msg['apontamento.descricao']}:" styleClass="negrito" />
-								<h:inputText id="descricao" value="#{apontamentoController.filter.descricaoLikeRight}" styleClass="inputTexto" />
-								
-								<h:outputText value="#{msg['apontamento.inicio']}:" styleClass="negrito" />
-								<rich:calendar value="#{apontamentoController.filter.inicioGreatherOrEqualsThan}" datePattern="dd/MM/yyyy" styleClass="inputTexto" />
-								
-								<h:outputText value="#{msg['apontamento.fim']}:" styleClass="negrito" />
-								<rich:calendar value="#{apontamentoController.filter.fimLowerOrEqualsThan}" datePattern="dd/MM/yyyy" styleClass="inputTexto" />
+			<rich:panel>
+				<f:facet name="header">
+					<h:outputText value="#{msg['cliente']}" />
+				</f:facet>
+				
+				<h:form>
+					<rich:panel>
+						<t:panelGrid columns="2" styleClass="cemPorCento" columnClasses="colunaLabel">
+							<h:outputLabel for="descricao" value="#{msg['apontamento.descricao']}:" styleClass="negrito" />
+							<h:inputText id="descricao" value="#{apontamentoController.filter.descricaoLikeRight}" styleClass="inputTexto" />
 							
-								<t:panelGroup styleClass="alinharDireita linhaBotoes" colspan="2">
-									<h:commandButton value="#{msg['adicionar']}" action="#{apontamentoController.adicionar}" />
-									<h:commandButton value="#{msg['pesquisar']}" action="#{apontamentoController.pesquisarApontamentosEmDemanda}" />
-								</t:panelGroup>							
-							</t:panelGrid>
-						</rich:panel>
-					</h:form>
-		
-					<br />
-					
-					<h:form>					
+							<h:outputText value="#{msg['apontamento.inicio']}:" styleClass="negrito" />
+							<rich:calendar value="#{apontamentoController.filter.inicioGreatherOrEqualsThan}" datePattern="dd/MM/yyyy" styleClass="inputTexto" />
+							
+							<h:outputText value="#{msg['apontamento.fim']}:" styleClass="negrito" />
+							<rich:calendar value="#{apontamentoController.filter.fimLowerOrEqualsThan}" datePattern="dd/MM/yyyy" styleClass="inputTexto" />
+							
+							<h:outputText value="#{msg['cliente']}:" styleClass="negrito" />
+							<h:selectOneMenu id="cliente" value="#{clienteController.bean}" converter="clienteConverter" styleClass="inputTexto">
+								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
+								<f:selectItems value="#{comboController.clientes}" />
+								<f:ajax event="change" listener="#{apontamentoController.mudouClienteEvento}" execute="@this" render="@form" />
+							</h:selectOneMenu>
+							
+							<h:outputText value="#{msg['projeto']}:" styleClass="negrito" />
+							<h:selectOneMenu id="projeto" value="#{projetoController.bean}" converter="projetoConverter" styleClass="inputTexto">
+								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
+								<f:selectItems value="#{projetoController.listAsSelectItems}" />
+								<f:ajax event="change" listener="#{apontamentoController.mudouProjetoEvento}" execute="@this" render="@form" />
+							</h:selectOneMenu>
+							
+							<h:outputText value="#{msg['demanda']}:" styleClass="negrito" />
+							<h:selectOneMenu id="demanda" value="#{demandaController.bean}" converter="demandaConverter" styleClass="inputTexto">
+								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
+								<f:selectItems value="#{demandaController.listAsSelectItems}" />
+							</h:selectOneMenu>
+						
+							<t:panelGroup styleClass="alinharDireita linhaBotoes" colspan="2">
+								<h:commandButton value="#{msg['adicionar']}" action="#{apontamentoController.adicionar}" />
+								<h:commandButton value="#{msg['pesquisar']}" action="#{apontamentoController.pesquisar}" />
+							</t:panelGroup>							
+						</t:panelGrid>
+					</rich:panel>
+				</h:form>
+				
+				<br />
+				
+				<h:form>					
 						<rich:dataTable value="#{apontamentoController.list}" var="apontamento" styleClass="cemPorCento">
 						
 							<rich:column styleClass="negrito alinharCentro">
@@ -102,7 +123,7 @@
 							</rich:column>
 						
 						</rich:dataTable>
-					</h:form>		
+					</h:form>
 				
 			</rich:panel>
 		</ui:define>

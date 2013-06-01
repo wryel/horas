@@ -4,36 +4,59 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:rich="http://richfaces.org/rich" 
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:t="http://myfaces.apache.org/tomahawk">
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="body">
 			<rich:panel>
 				<f:facet name="header">
 					<h:outputText value="#{msg['apontamento']}" />
 				</f:facet>
-				<h:form>
-					<h:panelGrid columns="2">
-					
-						<h:outputText value="#{msg['projeto']}:" />
-						<h:outputText value="#{demandaController.bean.projeto.nome}" />	
-					
-						<h:outputText value="#{msg['demanda']}:" />
-						<h:outputText value="#{demandaController.bean.nome}" />
+				
+				<rich:panel>
+					<h:form>
+						<t:panelGrid columns="2" columnClasses="colunaLabel" styleClass="cemPorCento">
 						
-						<h:outputText value="#{msg['apontamento.descricao']}:" />
-						<h:inputText value="#{apontamentoController.bean.descricao}" />
+							<h:outputText value="#{msg['cliente']}:" styleClass="negrito" />
+							<h:outputText value="#{clienteController.bean.nome}" rendered="#{apontamentoController.action == 'edit'}" />
+							<h:selectOneMenu id="cliente" value="#{clienteController.bean}" converter="clienteConverter" styleClass="inputTexto" rendered="#{apontamentoController.action == 'add'}">
+								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
+								<f:selectItems value="#{comboController.clientes}" />
+								<f:ajax event="change" listener="#{apontamentoController.mudouClienteEvento}" execute="@this" render="@form" />
+							</h:selectOneMenu>
+
+							<h:outputText value="#{msg['projeto']}:" styleClass="negrito" />
+							<h:outputText value="#{projetoController.bean.nome}" rendered="#{apontamentoController.action == 'edit'}" />	
+							<h:selectOneMenu id="projeto" value="#{projetoController.bean}" converter="projetoConverter" styleClass="inputTexto" rendered="#{projetoController.action == 'add'}">
+								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
+								<f:selectItems value="#{projetoController.listAsSelectItems}" />
+								<f:ajax event="change" listener="#{apontamentoController.mudouProjetoEvento}" execute="@this" render="@form" />
+							</h:selectOneMenu>
 						
-						<h:outputText value="#{msg['apontamento.inicio']}:" />
-						<rich:calendar value="#{apontamentoController.bean.inicio}" datePattern="dd/MM/yyyy HH:mm" enableManualInput="true" />
-						
-						<h:outputText value="#{msg['apontamento.fim']}:" />
-						<rich:calendar value="#{apontamentoController.bean.fim}" datePattern="dd/MM/yyyy HH:mm" enableManualInput="true" />
-						
-						<h:commandButton value="#{msg['voltar']}" action="#{apontamentoController.voltarParaVisualizacaoDeApontamentosDeDemanda}" />
-						<h:commandButton value="#{msg['adicionar']}" action="#{apontamentoController.salvarAdicionar}" rendered="#{apontamentoController.action == 'add'}" />
-						<h:commandButton value="#{msg['editar']}" action="#{apontamentoController.salvarEditar}" rendered="#{apontamentoController.action == 'edit'}" />
-					</h:panelGrid>	
-				</h:form>
+							<h:outputText value="#{msg['demanda']}:" styleClass="negrito" />
+							<h:outputText value="#{demandaController.bean.nome}" rendered="#{apontamentoController.action == 'edit'}" />
+							<h:selectOneMenu id="demanda" value="#{demandaController.bean}" converter="demandaConverter" styleClass="inputTexto" rendered="#{projetoController.action == 'add'}">
+								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
+								<f:selectItems value="#{demandaController.listAsSelectItems}" />
+							</h:selectOneMenu>
+							
+							<h:outputText value="#{msg['apontamento.descricao']}:" styleClass="negrito" />
+							<h:inputText value="#{apontamentoController.bean.descricao}" styleClass="inputTexto" />
+							
+							<h:outputText value="#{msg['apontamento.inicio']}:" styleClass="negrito" />
+							<rich:calendar value="#{apontamentoController.bean.inicio}" datePattern="dd/MM/yyyy HH:mm" enableManualInput="true" styleClass="inputTexto" />
+							
+							<h:outputText value="#{msg['apontamento.fim']}:" styleClass="negrito" />
+							<rich:calendar value="#{apontamentoController.bean.fim}" datePattern="dd/MM/yyyy HH:mm" enableManualInput="true" styleClass="inputTexto" />
+							
+							<t:panelGroup colspan="2" styleClass="alinharDireita linhaBotoes">
+								<h:commandButton value="#{msg['voltar']}" action="#{apontamentoController.listagem}" />
+								<h:commandButton value="#{msg['adicionar']}" action="#{apontamentoController.salvar}" rendered="#{apontamentoController.action == 'add'}" />
+								<h:commandButton value="#{msg['editar']}" action="#{apontamentoController.salvar}" rendered="#{apontamentoController.action == 'edit'}" />
+							</t:panelGroup>
+						</t:panelGrid>	
+					</h:form>
+				</rich:panel>
 			</rich:panel>
 		</ui:define>
 	</ui:composition>
