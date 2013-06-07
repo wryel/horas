@@ -1,5 +1,6 @@
 package br.com.wryel.horas.controller;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -9,6 +10,7 @@ import br.com.wryel.horas.business.BusinessException;
 import br.com.wryel.horas.business.ProjetoBusiness;
 import br.com.wryel.horas.entity.Cliente;
 import br.com.wryel.horas.entity.Projeto;
+import br.com.wryel.horas.entity.filter.ClienteFilter;
 import br.com.wryel.horas.entity.filter.ProjetoFilter;
 import br.com.wryel.horas.exception.HorasRuntimeException;
 import br.com.wryel.horas.util.FacesUtil;
@@ -27,6 +29,13 @@ public class ProjetoController extends AbstractController<Projeto> {
 	
 	public ProjetoController() {
 		super(Projeto.class);
+	}
+	
+	@Override
+	@PostConstruct
+	public void postConstruct() {
+		super.postConstruct();
+		filter.setClienteFilter(new ClienteFilter());
 	}
 
 	/**
@@ -68,7 +77,23 @@ public class ProjetoController extends AbstractController<Projeto> {
 	}
 	
 	public String pesquisar() {
-		super.list = projetoBusiness.list(new ProjetoFilter());
+		
+		ClienteController clienteController = FacesUtil.getInstance().getController(ClienteController.class);
+		
+		if (clienteController.getBean() != null) {
+			
+			Cliente cliente = clienteController.getBean();
+			
+			filter.getClienteFilter().setIdEquals(cliente.getId());
+			
+		} else {
+			
+			filter.getClienteFilter().setIdEquals(null);
+			
+		}
+
+		list = projetoBusiness.list(filter);
+		
 		return nav(listagem());
 	}
 	

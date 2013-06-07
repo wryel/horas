@@ -55,14 +55,6 @@ public class ApontamentoController extends AbstractController<Apontamento> {
 		filter.getDemandaFilter().getProjetoFilter().setClienteFilter(new ClienteFilter());
 	}
 	
-	public String pesquisarDemandaParaLancarApontamento() {
-		return Navegacao.Apontamento.PESQUISAR_DEMANDA_PARA_LANCAR_APONTAMENTO;
-	}
-	
-	public String visualizarApontamentosDeDemanda() {
-		return Navegacao.Apontamento.VISUALIZAR_APONTAMENTOS_DE_DEMANDA;
-	}
-	
 	public String entrada() {
 		return Navegacao.Apontamento.ENTRADA;
 	}
@@ -171,9 +163,11 @@ public class ApontamentoController extends AbstractController<Apontamento> {
 		return listagem();
 	}
 	
-	public String excluir() {
+	public String deletar() {
 		try {
-			apontamentoBusiness.delete(getBean());
+			apontamentoBusiness.delete(bean);
+			FacesUtil.getInstance().showInfo("registro.deletado");
+			getList().remove(bean);
 		} catch(BusinessException businessException) {
 			FacesUtil.getInstance().showBusinessError(businessException.getMessage());
 		}
