@@ -13,6 +13,7 @@ import br.com.wryel.horas.business.ApontamentoBusiness;
 import br.com.wryel.horas.business.BusinessException;
 import br.com.wryel.horas.business.DemandaBusiness;
 import br.com.wryel.horas.business.ProjetoBusiness;
+import br.com.wryel.horas.dto.Somatoria;
 import br.com.wryel.horas.entity.Apontamento;
 import br.com.wryel.horas.entity.Cliente;
 import br.com.wryel.horas.entity.Demanda;
@@ -28,6 +29,8 @@ import br.com.wryel.horas.util.SessionUtil;
 @ViewScoped
 public class ApontamentoController extends AbstractController<Apontamento> {
 
+	private static final long serialVersionUID = 1L;
+
 	@EJB
 	private ApontamentoBusiness apontamentoBusiness;
 	
@@ -40,8 +43,8 @@ public class ApontamentoController extends AbstractController<Apontamento> {
 	@Inject
 	private ApontamentoFilter filter;
 	
-	private static final long serialVersionUID = 1L;
-
+	private Somatoria somatoria;
+	
 	public ApontamentoController() {
 		super(Apontamento.class);
 	}
@@ -124,6 +127,8 @@ public class ApontamentoController extends AbstractController<Apontamento> {
 		}
 
 		list = apontamentoBusiness.list(filter);
+		
+		somatoria = apontamentoBusiness.somar(filter);
 		
 		return nav(listagem());
 	}
@@ -216,5 +221,19 @@ public class ApontamentoController extends AbstractController<Apontamento> {
 	 */
 	public void setFilter(ApontamentoFilter filter) {
 		this.filter = filter;
+	}
+
+	/**
+	 * @return the somatoria
+	 */
+	public Somatoria getSomatoria() {
+		return somatoria;
+	}
+
+	/**
+	 * @param somatoria the somatoria to set
+	 */
+	public void setSomatoria(Somatoria somatoria) {
+		this.somatoria = somatoria;
 	}
 }

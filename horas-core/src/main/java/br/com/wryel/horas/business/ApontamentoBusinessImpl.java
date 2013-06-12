@@ -5,7 +5,12 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.joda.time.Duration;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
+
 import br.com.wryel.horas.dao.ApontamentoDAO;
+import br.com.wryel.horas.dto.Somatoria;
 import br.com.wryel.horas.entity.Apontamento;
 import br.com.wryel.horas.entity.Demanda;
 import br.com.wryel.horas.entity.Usuario;
@@ -55,5 +60,40 @@ public class ApontamentoBusinessImpl extends BusinessImpl<Apontamento, Integer, 
 	public List<Apontamento> listApontamentosPorDemanda(Demanda demanda) {
 		List<Apontamento> apontamentos = dao.listApontamentosPorDemanda(demanda);
 		return apontamentos;
+	}
+
+	@Override
+	public Somatoria somar(ApontamentoFilter apontamentoFilter) {
+		
+		List<Apontamento> apontamentos = list(apontamentoFilter);
+		
+		Somatoria somatoria = new Somatoria();
+		
+		Duration duration = Duration.ZERO;
+		
+		for (Apontamento apontamento : apontamentos) {
+			
+			if (apontamento.getInicio() != null && apontamento.getFim() != null) {
+
+				Duration durationToPlus = new Duration(apontamento.getInicio().getTime(), apontamento.getFim().getTime());
+				
+				duration = duration.plus(durationToPlus);
+				
+			}
+			
+		}
+		
+		PeriodFormatter periodFormatter = 
+			new PeriodFormatterBuilder()
+				.printZeroAlways()
+				.minimumPrintedDigits(2)
+				.appendHours()
+				.appendSeparator(":")
+				.appendMinutes()
+				.toFormatter();
+
+		somatoria.setResultado(duration.toPeriod().toString(periodFormatter));
+		
+		return somatoria;
 	}	
 }

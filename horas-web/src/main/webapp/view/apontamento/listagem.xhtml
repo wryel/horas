@@ -67,7 +67,7 @@
 				                <h:outputText value="X" />
 				            </h:outputLink>
 				        </f:facet>
-						<h:outputFormat value="#{msg['cliente.confirmarDelecao']}">
+						<h:outputFormat value="#{msg['apontamento.confirmarDelecao']}">
 							<f:param value="#{apontamentoController.bean.descricao}" />
 						</h:outputFormat>
 						<h:panelGrid columns="2" styleClass="cemPorCento">
@@ -153,7 +153,13 @@
 						
 						</rich:dataTable>
 					</h:form>
-				
+					
+					<br />
+					
+					<rich:panel styleClass="alinharDireita">
+						<h:outputText value="#{apontamentoController.somatoria}" />
+					</rich:panel>
+	
 			</rich:panel>
 		</ui:define>
 	</ui:composition>
