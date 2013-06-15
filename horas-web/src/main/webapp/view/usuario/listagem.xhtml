@@ -5,6 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:rich="http://richfaces.org/rich" 
 	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:a4j="http://richfaces.org/a4j" 
 	xmlns:t="http://myfaces.apache.org/tomahawk">
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="body">		
@@ -19,8 +20,8 @@
 							<h:outputLabel value="#{msg['cliente.nome']}:" styleClass="negrito" />
 							<h:inputText value="#{clienteController.filter.nomeLikeRight}" />
 							<t:panelGroup styleClass="alinharDireita linhaBotoes" colspan="2">
-								<h:commandButton value="#{msg['adicionar']}" action="#{clienteController.adicionar}" />
-								<h:commandButton value="#{msg['pesquisar']}" action="#{clienteController.pesquisar}" />
+								<h:commandButton value="#{msg['adicionar']}" action="#{usuarioController.adicionar}" />
+								<h:commandButton value="#{msg['pesquisar']}" action="#{usuarioController.pesquisar}" />
 							</t:panelGroup>
 						</t:panelGrid>
 					</h:form>
@@ -29,18 +30,65 @@
 				<br />	
 					
 				<h:form>
-					<rich:dataTable value="#{clienteController.list}" var="cliente" styleClass="cemPorCento">
+				
+					<rich:popupPanel id="confirmarDelecao" domElementAttachment="form" resizeable="false">
+						<f:facet name="header">
+							<h:outputText value="#{msg['confirme']}" />
+						</f:facet>
+						<f:facet name="controls">
+				            <h:outputLink value="#" onclick="#{rich:component('confirmarDelecao')}.hide(); return false;">
+				                <h:outputText value="X" />
+				            </h:outputLink>
+				        </f:facet>
+						<h:outputFormat value="#{msg['usuario.confirmarDelecao']}">
+							<f:param value="#{usuarioController.bean.login}" />
+						</h:outputFormat>
+						<h:panelGrid columns="2" styleClass="cemPorCento">
+							<h:commandButton value="#{msg['cancelar']}" type="button" onclick="#{rich:component('confirmarDelecao')}.hide();" />
+							<h:commandButton action="#{usuarioController.deletar}" value="#{msg['deletar']}" />
+						</h:panelGrid>
+					</rich:popupPanel>					
+				
+					<rich:dataTable value="#{usuarioController.list}" var="usuario" styleClass="cemPorCento">
 						<rich:column>
 							<f:facet name="header">
-								<h:outputText value="#{msg['cliente.id']}" />
+								<h:outputText value="#{msg['usuario.id']}" />
 							</f:facet>
-							<h:outputText value="#{cliente.id}" />
+							<h:outputText value="#{usuario.id}" />
 						</rich:column>
+						
 						<rich:column>
 							<f:facet name="header">
-								<h:outputText value="#{msg['cliente.nome']}" />
+								<h:outputText value="#{msg['usuario.nome']}" />
 							</f:facet>
-							<h:outputText value="#{cliente.nome}" />
+							<h:outputText value="#{usuario.nome}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['usuario.email']}" />
+							</f:facet>
+							<h:outputText value="#{usuario.email}" />
+						</rich:column>
+						
+						<rich:column styleClass="alinharCentro">
+							<f:facet name="header">
+								<h:outputText value="#{msg['deletar']}" />
+							</f:facet>
+							<a4j:commandLink render="confirmarDelecao" oncomplete="#{rich:component('confirmarDelecao')}.show()">
+								<f:setPropertyActionListener target="#{usuarioController.bean}" value="#{usuario}" />
+								<h:graphicImage url="/resources/imagem/deletar.png" width="16" height="16" />								
+							</a4j:commandLink>							
+						</rich:column>
+						
+						<rich:column styleClass="alinharCentro">
+							<f:facet name="header">
+								<h:outputText value="#{msg['editar']}" />
+							</f:facet>
+							<h:commandLink action="#{usuarioController.editar}">
+								<f:setPropertyActionListener target="#{usuarioController.bean}" value="#{usuario}" />
+								<h:graphicImage url="/resources/imagem/editar.png" width="16" height="16" />
+							</h:commandLink>
 						</rich:column>
 					</rich:dataTable>
 				</h:form>				

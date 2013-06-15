@@ -11,12 +11,22 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(
-	columnNames = "login", 
+	columnNames = "email", 
 	name = "login_constraint"
 )})
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	public static final String TIPO_USUARIO = "U";
+	
+	public static final String TIPO_SUPERVISOR = "S";
+	
+	public static final String TIPO_ADMINISTRADOR = "A";
+	
+	public static final String ATIVO_SIM = "S";
+	
+	public static final String ATIVO_NAO = "N";
 	
 	@Id
 	@GeneratedValue
@@ -24,18 +34,16 @@ public class Usuario implements Serializable {
 	private Integer id;
 	
 	private String senha;
-
-	private String login;
 	
 	private String email;
 	
 	private String nome;
 	
-	private String sobreNome;
+	private String sobrenome;
 	
 	private String ativo;
 	
-	private String tipo = "A";
+	private String tipo;
 	
 	public Usuario() {
 		
@@ -61,14 +69,6 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -85,12 +85,18 @@ public class Usuario implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getSobreNome() {
-		return sobreNome;
+	/**
+	 * @return the sobrenome
+	 */
+	public String getSobrenome() {
+		return sobrenome;
 	}
 
-	public void setSobreNome(String sobreNome) {
-		this.sobreNome = sobreNome;
+	/**
+	 * @param sobrenome the sobrenome to set
+	 */
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
 	}
 
 	public String getAtivo() {
@@ -151,8 +157,8 @@ public class Usuario implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", senha=" + senha + ", login=" + login
+		return "Usuario [id=" + id + ", senha=" + senha 
 				+ ", email=" + email + ", nome=" + nome + ", sobreNome="
-				+ sobreNome + ", ativo=" + ativo + "]";
+				+ sobrenome + ", ativo=" + ativo + "]";
 	}
 }

@@ -70,14 +70,19 @@ public final class FacesUtil {
 		return httpSession;
 	}
 
-//	private ResourceBundle getResourceBundle() {
-//		ResourceBundle resourceBundle = getFacesContext().getApplication().getResourceBundle(getFacesContext(), "msg");
-//		return resourceBundle;
-//	}
+	private ResourceBundle getResourceBundleLabels() {
+		ResourceBundle resourceBundle = getFacesContext().getApplication().getResourceBundle(getFacesContext(), "msg");
+		return resourceBundle;
+	}
 	
 	private ResourceBundle getResourceBundleMessages() {
 		ResourceBundle resourceBundle = getFacesContext().getApplication().getResourceBundle(getFacesContext(), "messages");
 		return resourceBundle;
+	}
+	
+	public String getLabelKey(String key) {
+		String label = getResourceBundleLabels().getString(key);
+		return label;
 	}
 	
 	private FacesContext getFacesContext() {

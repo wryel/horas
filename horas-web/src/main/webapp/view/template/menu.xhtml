@@ -28,7 +28,7 @@
 					</h:commandLink>
 				</rich:panelMenuItem>
 			</rich:panelMenuGroup>
-			<rich:panelMenuGroup expanded="true" label="#{msg['administracao']}" rendered="#{sessionScope['usuario'].tipo == 'A'}">
+			<rich:panelMenuGroup expanded="true" label="#{msg['administracao']}" rendered="#{true or sessionScope['usuario'].tipo == 'A'}">
 				<rich:panelMenuItem leftIcon="/resources/imagem/usuario.png">
 					<h:commandLink action="#{usuarioController.listagem}">
 						<h:outputText value="#{msg['usuario']}" />
