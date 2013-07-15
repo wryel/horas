@@ -6,7 +6,8 @@
 	xmlns:rich="http://richfaces.org/rich" 
 	xmlns:ui="http://java.sun.com/jsf/facelets" 
 	xmlns:a4j="http://richfaces.org/a4j" 
-	xmlns:t="http://myfaces.apache.org/tomahawk">
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:custom="http://java.sun.com/jsf/composite/custom">
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="body">
 			<rich:panel>
@@ -31,23 +32,11 @@
 
 				<h:form>
 
-					<rich:popupPanel id="confirmarDelecao" domElementAttachment="form" resizeable="false">
-						<f:facet name="header">
-							<h:outputText value="#{msg['confirme']}" />
-						</f:facet>
-						<f:facet name="controls">
-				            <h:outputLink value="#" onclick="#{rich:component('confirmarDelecao')}.hide(); return false;">
-				                <h:outputText value="X" />
-				            </h:outputLink>
-				        </f:facet>
+					<custom:popupAction popupId="confirmarDelecao" actionConfirm="#{clienteController.deletar()}">
 						<h:outputFormat value="#{msg['cliente.confirmarDelecao']}">
 							<f:param value="#{clienteController.bean.nome}" />
 						</h:outputFormat>
-						<h:panelGrid columns="2" styleClass="cemPorCento">
-							<h:commandButton value="#{msg['cancelar']}" type="button" onclick="#{rich:component('confirmarDelecao')}.hide();" />
-							<h:commandButton action="#{clienteController.deletar}" value="#{msg['deletar']}" />
-						</h:panelGrid>
-					</rich:popupPanel>
+					</custom:popupAction>
 
 					<rich:dataTable value="#{clienteController.list}" var="cliente" styleClass="cemPorCento">
 						<rich:column styleClass="alinharCentro negrito">
@@ -57,7 +46,7 @@
 							<h:outputText value="#{cliente.id}" />
 						</rich:column>
 						
-						<rich:column styleClass="alinharCentro">
+						<rich:column styleClass="alinharCentro negrito">
 							<f:facet name="header">
 								<h:outputText value="#{msg['cliente.nome']}" />
 							</f:facet>
@@ -68,10 +57,12 @@
 							<f:facet name="header">
 								<h:outputText value="#{msg['deletar']}" />
 							</f:facet>
+					
 							<a4j:commandLink render="confirmarDelecao" oncomplete="#{rich:component('confirmarDelecao')}.show()">
 								<f:setPropertyActionListener target="#{clienteController.bean}" value="#{cliente}" />
 								<h:graphicImage url="/resources/imagem/deletar.png" width="16" height="16" />								
-							</a4j:commandLink>							
+							</a4j:commandLink>	
+											
 						</rich:column>
 						
 						<rich:column styleClass="alinharCentro">

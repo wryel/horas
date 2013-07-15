@@ -10,7 +10,6 @@ import org.apache.commons.lang.StringUtils;
 
 import br.com.wryel.horas.dao.ClienteDAO;
 import br.com.wryel.horas.entity.Cliente;
-import br.com.wryel.horas.entity.Demanda;
 import br.com.wryel.horas.entity.Projeto;
 import br.com.wryel.horas.entity.filter.ClienteFilter;
 
@@ -51,33 +50,12 @@ public class ClienteBusinessImpl extends BusinessImpl<Cliente, Integer, ClienteF
 	}
 	
 	@Override
-	public void delete(Cliente cliente) throws BusinessException {
-		
+	public void delete(Cliente cliente) throws BusinessException {	
 		Cliente clienteParaDeletar = dao.get(cliente.getId());
-		
 		List<Projeto> projetos = clienteParaDeletar.getProjetos();
-		
 		if (CollectionUtils.isNotEmpty(projetos)) {
-			
-			for (Projeto projeto : projetos) {
-				
-				List<Demanda> demandas = projeto.getDemandas();
-				
-				for (Demanda demanda : demandas) {
-					
-					if (CollectionUtils.isNotEmpty(demanda.getApontamentos())) {
-						
-						throw new BusinessException("Existem apontamentos cadastrados para a demanda \"" + demanda.getNome() + "\" do projeto \"" + projeto.getNome() + "\" do cliente \"" + cliente.getNome() + "\", não será possível deletar");
-						
-					}
-					
-				}
-				
-			}
-			
+			throw new BusinessException("Existem projetos cadastrados para o cliente " + cliente.getNome());
 		}
-		
 		super.delete(clienteParaDeletar);
-		
 	}
 }

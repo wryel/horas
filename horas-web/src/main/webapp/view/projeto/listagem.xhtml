@@ -6,7 +6,8 @@
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:rich="http://richfaces.org/rich" 
 	xmlns:t="http://myfaces.apache.org/tomahawk"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:custom="http://java.sun.com/jsf/composite/custom">
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="body">
 			<rich:panel>
@@ -38,25 +39,11 @@
 		
 				<h:form>
 					
-					<rich:popupPanel id="confirmarDelecao" domElementAttachment="form" resizeable="false">
-						<f:facet name="header">
-							<h:outputText value="#{msg['confirme']}" />
-						</f:facet>
-						<f:facet name="controls">
-				            <h:outputLink value="#" onclick="#{rich:component('confirmarDelecao')}.hide(); return false;">
-				                <h:outputText value="X" />
-				            </h:outputLink>
-				        </f:facet>
+					<custom:popupAction popupId="confirmarDelecao" actionConfirm="#{projetoController.deletar()}">
 						<h:outputFormat value="#{msg['projeto.confirmarDelecao']}">
 							<f:param value="#{projetoController.bean.nome}" />
 						</h:outputFormat>
-						<t:panelGrid columns="1" styleClass="cemPorCento">
-							<t:panelGroup styleClass="alinharDireita linhaBotoes">
-								<h:commandButton value="#{msg['cancelar']}" type="button" onclick="#{rich:component('confirmarDelecao')}.hide();" />
-								<h:commandButton action="#{projetoController.deletar}" value="#{msg['deletar']}" />
-							</t:panelGroup>
-						</t:panelGrid>
-					</rich:popupPanel>
+					</custom:popupAction>
 				
 					<rich:dataTable value="#{projetoController.list}" var="projeto" styleClass="cemPorCento">
 						<rich:column styleClass="negrito alinharCentro">
@@ -66,7 +53,7 @@
 							<h:outputText value="#{projeto.id}" />
 						</rich:column>
 						
-						<rich:column>
+						<rich:column styleClass="alinharCentro negrito">
 							<f:facet name="header">
 								<h:outputText value="#{msg['projeto.nome']}" />
 							</f:facet>

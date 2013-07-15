@@ -6,7 +6,8 @@
 	xmlns:rich="http://richfaces.org/rich" 
 	xmlns:ui="http://java.sun.com/jsf/facelets" 
 	xmlns:a4j="http://richfaces.org/a4j" 
-	xmlns:t="http://myfaces.apache.org/tomahawk">
+	xmlns:t="http://myfaces.apache.org/tomahawk" 
+	xmlns:custom="http://java.sun.com/jsf/composite/custom">
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="body">
 			<rich:panel>
@@ -58,107 +59,95 @@
 				
 				<h:form>	
 					
-					<rich:popupPanel id="confirmarDelecao" domElementAttachment="form" resizeable="false">
-						<f:facet name="header">
-							<h:outputText value="#{msg['confirme']}" />
-						</f:facet>
-						<f:facet name="controls">
-				            <h:outputLink value="#" onclick="#{rich:component('confirmarDelecao')}.hide(); return false;">
-				                <h:outputText value="X" />
-				            </h:outputLink>
-				        </f:facet>
+					<custom:popupAction popupId="confirmarDelecao" actionConfirm="#{demandaController.deletar()}">
 						<h:outputFormat value="#{msg['apontamento.confirmarDelecao']}">
 							<f:param value="#{apontamentoController.bean.descricao}" />
 						</h:outputFormat>
-						<h:panelGrid columns="2" styleClass="cemPorCento">
-							<h:commandButton value="#{msg['cancelar']}" type="button" onclick="#{rich:component('confirmarDelecao')}.hide();" />
-							<h:commandButton action="#{apontamentoController.deletar}" value="#{msg['deletar']}" />
-						</h:panelGrid>
-					</rich:popupPanel>
-								
-						<rich:dataTable value="#{apontamentoController.list}" var="apontamento" styleClass="cemPorCento">
-						
-							<rich:column styleClass="negrito alinharCentro">
-								<f:facet name="header">
-									<h:outputText value="#{msg['apontamento.id']}" />
-								</f:facet>
-								<h:outputText value="#{apontamento.id}" />
-							</rich:column>
-						
-							<rich:column>
-								<f:facet name="header">
-									<h:outputText value="#{msg['apontamento.descricao']}" />
-								</f:facet>
-								<h:outputText value="#{apontamento.descricao}" />
-							</rich:column>
-							
-							<rich:column styleClass="alinharCentro">
-								<f:facet name="header">
-									<h:outputText value="#{msg['demanda']}" />
-								</f:facet>
-								<h:outputText value="#{apontamento.demanda.nome}" />
-							</rich:column>
-							
-							<rich:column styleClass="alinharCentro">
-								<f:facet name="header">
-									<h:outputText value="#{msg['projeto']}" />
-								</f:facet>
-								<h:outputText value="#{apontamento.demanda.projeto.nome}" />
-							</rich:column>
-							
-							<rich:column styleClass="alinharCentro">
-								<f:facet name="header">
-									<h:outputText value="#{msg['cliente']}" />
-								</f:facet>
-								<h:outputText value="#{apontamento.demanda.projeto.cliente.nome}" />
-							</rich:column>
-							
-							<rich:column styleClass="alinharCentro">
-								<f:facet name="header">
-									<h:outputText value="#{msg['apontamento.inicio']}" />
-								</f:facet>
-								<h:outputText value="#{apontamento.inicio}">
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-								</h:outputText>
-							</rich:column>
-							
-							<rich:column styleClass="alinharCentro">
-								<f:facet name="header">
-									<h:outputText value="#{msg['apontamento.fim']}" />
-								</f:facet>
-								<h:outputText value="#{apontamento.fim}">
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-								</h:outputText>
-							</rich:column>
-							
-							<rich:column styleClass="alinharCentro">
-								<f:facet name="header">
-									<h:outputText value="#{msg['deletar']}" />
-								</f:facet>
-								<a4j:commandLink render="confirmarDelecao" oncomplete="#{rich:component('confirmarDelecao')}.show()" execute="@this">
-									<f:setPropertyActionListener target="#{apontamentoController.bean}" value="#{apontamento}" />
-									<h:graphicImage url="/resources/imagem/deletar.png" width="16" height="16" />								
-								</a4j:commandLink>
-							</rich:column>
-							
-							<rich:column styleClass="alinharCentro">
-								<f:facet name="header">
-									<h:outputText value="#{msg['editar']}" />
-								</f:facet>
-								<h:commandLink action="#{apontamentoController.editar}">
-									<f:setPropertyActionListener target="#{apontamentoController.bean}" value="#{apontamento}" />
-									<h:graphicImage url="/resources/imagem/editar.png" width="16" height="16" />
-								</h:commandLink>
-							</rich:column>
-						
-						</rich:dataTable>
-					</h:form>
+					</custom:popupAction>
+										
+					<rich:dataTable value="#{apontamentoController.list}" var="apontamento" styleClass="cemPorCento">
 					
-					<br />
+						<rich:column styleClass="negrito alinharCentro">
+							<f:facet name="header">
+								<h:outputText value="#{msg['apontamento.id']}" />
+							</f:facet>
+							<h:outputText value="#{apontamento.id}" />
+						</rich:column>
 					
-					<rich:panel styleClass="alinharDireita">
-						<h:outputText value="#{apontamentoController.somatoria}" />
-					</rich:panel>
+						<rich:column styleClass="negrito alinharCentro">
+							<f:facet name="header">
+								<h:outputText value="#{msg['apontamento.descricao']}" />
+							</f:facet>
+							<h:outputText value="#{apontamento.descricao}" />
+						</rich:column>
+						
+						<rich:column styleClass="alinharCentro">
+							<f:facet name="header">
+								<h:outputText value="#{msg['demanda']}" />
+							</f:facet>
+							<h:outputText value="#{apontamento.demanda.nome}" />
+						</rich:column>
+						
+						<rich:column styleClass="alinharCentro">
+							<f:facet name="header">
+								<h:outputText value="#{msg['projeto']}" />
+							</f:facet>
+							<h:outputText value="#{apontamento.demanda.projeto.nome}" />
+						</rich:column>
+						
+						<rich:column styleClass="alinharCentro">
+							<f:facet name="header">
+								<h:outputText value="#{msg['cliente']}" />
+							</f:facet>
+							<h:outputText value="#{apontamento.demanda.projeto.cliente.nome}" />
+						</rich:column>
+						
+						<rich:column styleClass="alinharCentro">
+							<f:facet name="header">
+								<h:outputText value="#{msg['apontamento.inicio']}" />
+							</f:facet>
+							<h:outputText value="#{apontamento.inicio}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+							</h:outputText>
+						</rich:column>
+						
+						<rich:column styleClass="alinharCentro">
+							<f:facet name="header">
+								<h:outputText value="#{msg['apontamento.fim']}" />
+							</f:facet>
+							<h:outputText value="#{apontamento.fim}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+							</h:outputText>
+						</rich:column>
+						
+						<rich:column styleClass="alinharCentro">
+							<f:facet name="header">
+								<h:outputText value="#{msg['deletar']}" />
+							</f:facet>
+							<a4j:commandLink render="confirmarDelecao" oncomplete="#{rich:component('confirmarDelecao')}.show()" execute="@this">
+								<f:setPropertyActionListener target="#{apontamentoController.bean}" value="#{apontamento}" />
+								<h:graphicImage url="/resources/imagem/deletar.png" width="16" height="16" />								
+							</a4j:commandLink>
+						</rich:column>
+						
+						<rich:column styleClass="alinharCentro">
+							<f:facet name="header">
+								<h:outputText value="#{msg['editar']}" />
+							</f:facet>
+							<h:commandLink action="#{apontamentoController.editar}">
+								<f:setPropertyActionListener target="#{apontamentoController.bean}" value="#{apontamento}" />
+								<h:graphicImage url="/resources/imagem/editar.png" width="16" height="16" />
+							</h:commandLink>
+						</rich:column>
+					
+					</rich:dataTable>
+				</h:form>
+					
+				<br />
+					
+				<rich:panel styleClass="alinharDireita">
+					<h:outputText value="#{apontamentoController.somatoria}" />
+				</rich:panel>
 	
 			</rich:panel>
 		</ui:define>

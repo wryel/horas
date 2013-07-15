@@ -18,24 +18,21 @@
 						<t:panelGrid columns="2" columnClasses="colunaLabel" styleClass="cemPorCento">
 						
 							<h:outputText value="#{msg['cliente']}:" styleClass="negrito" />
-							<h:outputText value="#{clienteController.bean.nome}" rendered="#{apontamentoController.action == 'edit'}" />
-							<h:selectOneMenu id="cliente" value="#{clienteController.bean}" converter="clienteConverter" styleClass="inputTexto" rendered="#{apontamentoController.action == 'add'}">
+							<h:selectOneMenu id="cliente" value="#{clienteController.bean}" converter="clienteConverter" styleClass="inputTexto">
 								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
 								<f:selectItems value="#{comboController.clientes}" />
 								<f:ajax event="change" listener="#{apontamentoController.mudouClienteEvento}" execute="@this" render="@form" />
 							</h:selectOneMenu>
 
 							<h:outputText value="#{msg['projeto']}:" styleClass="negrito" />
-							<h:outputText value="#{projetoController.bean.nome}" rendered="#{apontamentoController.action == 'edit'}" />	
-							<h:selectOneMenu id="projeto" value="#{projetoController.bean}" converter="projetoConverter" styleClass="inputTexto" rendered="#{projetoController.action == 'add'}">
+							<h:selectOneMenu id="projeto" value="#{projetoController.bean}" converter="projetoConverter" styleClass="inputTexto">
 								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
 								<f:selectItems value="#{projetoController.listAsSelectItems}" />
 								<f:ajax event="change" listener="#{apontamentoController.mudouProjetoEvento}" execute="@this" render="@form" />
 							</h:selectOneMenu>
 						
 							<h:outputText value="#{msg['demanda']}:" styleClass="negrito" />
-							<h:outputText value="#{demandaController.bean.nome}" rendered="#{apontamentoController.action == 'edit'}" />
-							<h:selectOneMenu id="demanda" value="#{demandaController.bean}" converter="demandaConverter" styleClass="inputTexto" rendered="#{projetoController.action == 'add'}">
+							<h:selectOneMenu id="demanda" value="#{demandaController.bean}" converter="demandaConverter" styleClass="inputTexto">
 								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
 								<f:selectItems value="#{demandaController.listAsSelectItems}" />
 							</h:selectOneMenu>

@@ -57,7 +57,7 @@ public class ApontamentoBusinessImpl extends BusinessImpl<Apontamento, Integer, 
 	}
 	
 	@Override
-	public List<Apontamento> listApontamentosPorDemanda(Demanda demanda) {
+	public List<Apontamento> listaPorDemanda(Demanda demanda) {
 		List<Apontamento> apontamentos = dao.listApontamentosPorDemanda(demanda);
 		return apontamentos;
 	}

@@ -1,0 +1,36 @@
+<html 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:rich="http://richfaces.org/rich" 
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	<composite:interface>
+		<composite:attribute name="popupId" required="false" />
+		<composite:attribute name="title" required="false" />
+		<composite:attribute name="actionConfirm" required="false" method-signature="java.lang.String action()" />
+		<composite:attribute name="actionConfirmLabel" required="false" />
+		<composite:attribute name="actionCancel" required="false" method-signature="java.lang.String action()" />
+		<composite:attribute name="actionCancelLabel" required="false" />
+	</composite:interface>
+	<composite:implementation>
+		
+		<rich:popupPanel id="#{cc.attrs.popupId}" domElementAttachment="form" resizeable="false">
+			<f:facet name="header">
+				<h:outputText value="#{empty cc.attrs.title ? msg['confirme'] : cc.attrs.title}" />
+			</f:facet>
+			<f:facet name="controls">
+	            <h:outputLink value="#" onclick="#{rich:component(cc.attrs.popupId)}.hide(); return false;">
+	                <h:outputText value="X" />
+	            </h:outputLink>
+	        </f:facet>
+	        <composite:insertChildren />
+			<h:panelGrid columns="2" styleClass="cemPorCento">
+				<h:commandButton onclick="#{rich:component(cc.attrs.popupId)}.hide();" value="#{empty cc.attrs.actionCancelLabel ? msg['cancelar'] : cc.attrs.actionCancelLabel}" type="button" rendered="#{cc.attrs.actionCancel == null}" />
+				<h:commandButton action="#{cc.attrs.actionCancel}" value="#{empty cc.attrs.actionConfirmLabel ? msg['cancelar'] : cc.attrs.actionConfirmLabel}" rendered="#{cc.attrs.actionCancel != null}" />
+				<h:commandButton onclick="#{rich:component(cc.attrs.popupId)}.hide();" value="#{empty cc.attrs.actionConfirmLabel ? msg['confirmar'] : cc.attrs.actionConfirmLabel}" type="button" rendered="#{cc.attrs.actionConfirm == null}" />
+				<h:commandButton action="#{cc.attrs.actionConfirm}" value="#{empty cc.attrs.actionConfirmLabel ? msg['confirmar'] : cc.attrs.actionConfirmLabel}" rendered="#{cc.attrs.actionConfirm != null}" />
+			</h:panelGrid>
+		</rich:popupPanel>
+		
+	</composite:implementation>
+</html>

@@ -12,7 +12,7 @@ import br.com.wryel.horas.entity.filter.ApontamentoFilter;
 @Local
 public interface ApontamentoBusiness extends Business<Apontamento, Integer, ApontamentoFilter> {
 	
-	public List<Apontamento> listApontamentosPorDemanda(Demanda demanda);
+	public List<Apontamento> listaPorDemanda(Demanda demanda);
 	
 	public Somatoria somar(ApontamentoFilter apontamentoFilter);
 }

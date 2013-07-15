@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import br.com.wryel.horas.business.ApontamentoBusiness;
 import br.com.wryel.horas.business.BusinessException;
+import br.com.wryel.horas.business.ClienteBusiness;
 import br.com.wryel.horas.business.DemandaBusiness;
 import br.com.wryel.horas.business.ProjetoBusiness;
 import br.com.wryel.horas.dto.Somatoria;
@@ -39,6 +40,9 @@ public class ApontamentoController extends AbstractController<Apontamento> {
 	
 	@EJB
 	private ProjetoBusiness projetoBusiness;
+	
+	@EJB 
+	private ClienteBusiness clienteBusiness;
 	
 	@Inject
 	private ApontamentoFilter filter;
@@ -77,10 +81,16 @@ public class ApontamentoController extends AbstractController<Apontamento> {
 		Apontamento apontamento = apontamentoBusiness.get(getBean().getId());
 		
 		FacesUtil.getInstance().getFlashScope().put(ACTION, ACTION_EDIT);
+		
 		FacesUtil.getInstance().getFlashScope().put(flashEntityKey(), apontamento);
+		
 		FacesUtil.getInstance().getFlashScope().put(demandaController.flashEntityKey(), apontamento.getDemanda());
 		FacesUtil.getInstance().getFlashScope().put(projetoController.flashEntityKey(), apontamento.getDemanda().getProjeto());
 		FacesUtil.getInstance().getFlashScope().put(clienteController.flashEntityKey(), apontamento.getDemanda().getProjeto().getCliente());
+		
+		FacesUtil.getInstance().getFlashScope().put(demandaController.flashListKey(), demandaBusiness.listByProjeto(apontamento.getDemanda().getProjeto()));
+		FacesUtil.getInstance().getFlashScope().put(projetoController.flashListKey(), projetoBusiness.listByCliente(apontamento.getDemanda().getProjeto().getCliente()));
+		FacesUtil.getInstance().getFlashScope().put(clienteController.flashListKey(), clienteBusiness.list());
 		
 		return nav(entrada());
 	}
