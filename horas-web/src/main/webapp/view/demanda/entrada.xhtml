@@ -18,9 +18,6 @@
 					
 					<rich:panel>
 						<t:panelGrid columns="2" columnClasses="colunaLabel" styleClass="cemPorCento">
-							<h:outputText value="#{msg['demanda.nome']}:" styleClass="negrito" />
-							<h:inputText value="#{demandaController.bean.nome}" styleClass="inputTexto" />
-							
 							<h:outputText value="#{msg['cliente']}:" styleClass="negrito" />
 							<h:selectOneMenu value="#{clienteController.bean}" converter="clienteConverter" styleClass="inputTexto">
 								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
@@ -34,6 +31,9 @@
 								<f:selectItems value="#{projetoController.listAsSelectItems}" />
 							</h:selectOneMenu>
 							
+							<h:outputText value="#{msg['demanda.nome']}:" styleClass="negrito" />
+							<h:inputText value="#{demandaController.bean.nome}" styleClass="inputTexto" />
+														
 							<t:panelGroup colspan="2" styleClass="alinharDireita linhaBotoes">
 								<h:commandButton action="#{demandaController.listagem}" value="#{msg['voltar']}" />
 								<h:commandButton action="#{demandaController.salvar}" value="#{msg['adicionar']}" rendered="#{clienteController.action == 'add'}" />

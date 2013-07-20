@@ -18,6 +18,20 @@
 				<h:form>
 					<rich:panel>
 						<t:panelGrid columns="2" styleClass="cemPorCento" columnClasses="colunaLabel">
+							
+							<h:outputText value="#{msg['cliente']}:" styleClass="negrito" />
+							<h:selectOneMenu id="cliente" value="#{clienteController.bean}" converter="clienteConverter" styleClass="inputTexto">
+								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
+								<f:selectItems value="#{comboController.clientes}" />
+								<f:ajax event="change" listener="#{apontamentoController.mudouClienteEvento}" execute="@this" render="@form" />
+							</h:selectOneMenu>
+							
+							<h:outputText value="#{msg['projeto']}:" styleClass="negrito" />
+							<h:selectOneMenu id="projeto" value="#{projetoController.bean}" converter="projetoConverter" styleClass="inputTexto">
+								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
+								<f:selectItems value="#{projetoController.listAsSelectItems}" />
+							</h:selectOneMenu>
+							
 							<h:outputLabel value="#{msg['demanda.nome']}:" styleClass="negrito" />
 							<h:inputText value="#{demandaController.filter.nomeLikeRight}" styleClass="inputTexto" />
 							

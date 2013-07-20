@@ -2,6 +2,7 @@ package br.com.wryel.horas.controller;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -14,7 +15,9 @@ import br.com.wryel.horas.business.ProjetoBusiness;
 import br.com.wryel.horas.entity.Cliente;
 import br.com.wryel.horas.entity.Demanda;
 import br.com.wryel.horas.entity.Projeto;
+import br.com.wryel.horas.entity.filter.ClienteFilter;
 import br.com.wryel.horas.entity.filter.DemandaFilter;
+import br.com.wryel.horas.entity.filter.ProjetoFilter;
 import br.com.wryel.horas.exception.HorasRuntimeException;
 import br.com.wryel.horas.util.FacesUtil;
 
@@ -33,6 +36,15 @@ public class DemandaController extends AbstractController<Demanda> {
 	@Inject
 	private DemandaFilter filter;
 	
+	
+	@Override
+	@PostConstruct
+	public void postConstruct() {
+		super.postConstruct();
+		filter.setProjetoFilter(new ProjetoFilter());
+		filter.getProjetoFilter().setClienteFilter(new ClienteFilter());
+	}
+	
 	public DemandaController() {
 		super(Demanda.class);
 	}
@@ -46,6 +58,23 @@ public class DemandaController extends AbstractController<Demanda> {
 	}
 	
 	public String pesquisar() {
+		
+		ClienteController clienteController = FacesUtil.getInstance().getController(ClienteController.class);
+		
+		ProjetoController projetoController = FacesUtil.getInstance().getController(ProjetoController.class);
+		
+		if (clienteController.getBean() != null) {
+			filter.getProjetoFilter().getClienteFilter().setIdEquals(clienteController.getBean().getId());
+		} else {
+			filter.getProjetoFilter().getClienteFilter().setIdEquals(null);
+		}
+		
+		if (projetoController.getBean() != null) {
+			filter.getProjetoFilter().setIdEquals(projetoController.getBean().getId());
+		} else {
+			filter.getProjetoFilter().setIdEquals(null);
+		}
+		
 		list = demandaBusiness.list(getFilter());
 		return nav(listagem());
 	}
@@ -146,7 +175,6 @@ public class DemandaController extends AbstractController<Demanda> {
 			List<Projeto> projetos = projetoBusiness.listByCliente(cliente);
 			projetoController.setList(projetos);
 		} else {
-			clienteController.cleanList();
 			projetoController.cleanList();
 		}
 	}

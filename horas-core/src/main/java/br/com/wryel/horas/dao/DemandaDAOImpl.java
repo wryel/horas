@@ -39,6 +39,16 @@ public class DemandaDAOImpl extends DAOImpl<Demanda, Long, DemandaFilter> implem
 			
 		}
 		
+		if (filter.getProjetoFilter().getClienteFilter() != null) {
+			
+			if (filter.getProjetoFilter().getClienteFilter().getIdEquals() != null) {
+				
+				wheres.add("d.projeto.cliente.id = :projetoClienteIdEquals");
+				
+			}
+			
+		}
+		
 		if (!wheres.isEmpty()) {
 			sql.append(" WHERE ");
 			sql.append(StringUtils.join(wheres, " AND "));
@@ -57,6 +67,16 @@ public class DemandaDAOImpl extends DAOImpl<Demanda, Long, DemandaFilter> implem
 			if (filter.getProjetoFilter().getIdEquals() != null) {
 				
 				query.setParameter("projetoIdEquals", filter.getProjetoFilter().getIdEquals());
+				
+			}
+			
+		}
+		
+		if (filter.getProjetoFilter().getClienteFilter() != null) {
+			
+			if (filter.getProjetoFilter().getClienteFilter().getIdEquals() != null) {
+				
+				query.setParameter("projetoClienteIdEquals", filter.getProjetoFilter().getClienteFilter().getIdEquals());
 				
 			}
 			

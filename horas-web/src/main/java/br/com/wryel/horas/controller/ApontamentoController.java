@@ -99,13 +99,11 @@ public class ApontamentoController extends AbstractController<Apontamento> {
 	
 	public String adicionar() {
 		
-		DemandaController demandaController = FacesUtil.getInstance().getController(DemandaController.class);
+		ClienteController clienteController = FacesUtil.getInstance().getController(ClienteController.class);
 		
-		Demanda demanda = demandaController.getBean();
-		
-		FacesUtil.getInstance().getFlashScope().put(ACTION, ACTION_ADD);
 		FacesUtil.getInstance().getFlashScope().put(flashEntityKey(), new Apontamento());
-		FacesUtil.getInstance().getFlashScope().put(demandaController.flashEntityKey(), demanda);
+		FacesUtil.getInstance().getFlashScope().put(clienteController.flashListKey(), clienteBusiness.list());
+		FacesUtil.getInstance().getFlashScope().put(ACTION, ACTION_ADD);
 		
 		return nav(entrada());
 	}
@@ -171,11 +169,11 @@ public class ApontamentoController extends AbstractController<Apontamento> {
 			
 			FacesUtil.getInstance().showBusinessError(businessException.getMessage());
 			
-			return entrada();
+			return nav(entrada());
 			
 		}
 		
-		return listagem();
+		return nav(listagem());
 	}
 	
 	public String deletar() {

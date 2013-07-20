@@ -18,16 +18,7 @@
 				<h:form>
 					<rich:panel>
 						<t:panelGrid columns="2" styleClass="cemPorCento" columnClasses="colunaLabel">
-							<h:outputLabel for="descricao" value="#{msg['apontamento.descricao']}:" styleClass="negrito" />
-							<h:inputText id="descricao" value="#{apontamentoController.filter.descricaoLikeRight}" styleClass="inputTexto" />
-							
-							<h:outputText value="#{msg['apontamento.inicio']}:" styleClass="negrito" />
-							<rich:calendar value="#{apontamentoController.filter.inicioGreatherOrEqualsThan}" datePattern="dd/MM/yyyy" styleClass="inputTexto" />
-							
-							<h:outputText value="#{msg['apontamento.fim']}:" styleClass="negrito" />
-							<rich:calendar value="#{apontamentoController.filter.fimLowerOrEqualsThan}" datePattern="dd/MM/yyyy" styleClass="inputTexto" />
-							
-							<h:outputText value="#{msg['cliente']}:" styleClass="negrito" />
+																					<h:outputText value="#{msg['cliente']}:" styleClass="negrito" />
 							<h:selectOneMenu id="cliente" value="#{clienteController.bean}" converter="clienteConverter" styleClass="inputTexto">
 								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
 								<f:selectItems value="#{comboController.clientes}" />
@@ -46,6 +37,15 @@
 								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
 								<f:selectItems value="#{demandaController.listAsSelectItems}" />
 							</h:selectOneMenu>
+
+							<h:outputLabel for="descricao" value="#{msg['apontamento.descricao']}:" styleClass="negrito" />
+							<h:inputText id="descricao" value="#{apontamentoController.filter.descricaoLikeRight}" styleClass="inputTexto" />
+							
+							<h:outputText value="#{msg['apontamento.inicio']}:" styleClass="negrito" />
+							<rich:calendar value="#{apontamentoController.filter.inicioGreatherOrEqualsThan}" datePattern="dd/MM/yyyy" styleClass="inputTexto" />
+							
+							<h:outputText value="#{msg['apontamento.fim']}:" styleClass="negrito" />
+							<rich:calendar value="#{apontamentoController.filter.fimLowerOrEqualsThan}" datePattern="dd/MM/yyyy" styleClass="inputTexto" />
 						
 							<t:panelGroup styleClass="alinharDireita linhaBotoes" colspan="2">
 								<h:commandButton value="#{msg['adicionar']}" action="#{apontamentoController.adicionar}" />

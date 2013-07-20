@@ -18,14 +18,14 @@
 				<h:form>
 					<rich:panel>					
 						<t:panelGrid columns="2" styleClass="cemPorCento" columnClasses="colunaLabel">
-							<h:outputLabel value="#{msg['projeto.nome']}:" styleClass="negrito" />
-							<h:inputText value="#{projetoController.filter.nomeLikeRight}" styleClass="inputTexto" />
-							
 							<h:outputText value="#{msg['cliente']}:" styleClass="negrito" />
 							<h:selectOneMenu id="cliente" value="#{clienteController.bean}" converter="clienteConverter" styleClass="inputTexto">
 								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
 								<f:selectItems value="#{comboController.clientes}" />
 							</h:selectOneMenu>
+
+							<h:outputLabel value="#{msg['projeto.nome']}:" styleClass="negrito" />
+							<h:inputText value="#{projetoController.filter.nomeLikeRight}" styleClass="inputTexto" />							
 							
 							<t:panelGroup styleClass="alinharDireita linhaBotoes" colspan="2">
 								<h:commandButton value="#{msg['adicionar']}" action="#{projetoController.adicionar}" />
