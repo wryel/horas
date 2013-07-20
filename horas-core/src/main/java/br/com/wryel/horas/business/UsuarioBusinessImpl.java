@@ -59,6 +59,10 @@ public class UsuarioBusinessImpl extends BusinessImpl<Usuario, Integer, UsuarioF
 			throw new BusinessException("Senha precisa ter pelo menos 5 caracteres");
 		}
 		
+		if (StringUtils.isBlank(entity.getTipo())) {
+			throw new BusinessException("Tipo do usuário precisa ser informado");
+		}
+		
 	}
 	
 	@Override

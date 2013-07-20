@@ -3,6 +3,8 @@ package br.com.wryel.horas.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -44,6 +46,8 @@ public class ComboController implements Serializable {
 	
 	private List<SelectItem> tiposUsuario = new ArrayList<>();
 
+	private Map<String, String> tiposUsuarioMap = new WeakHashMap<>();
+	
 	/**
 	 * @return the tiposUsuario
 	 */
@@ -54,6 +58,15 @@ public class ComboController implements Serializable {
 			tiposUsuario.add(new SelectItem(Usuario.TIPO_ADMINISTRADOR, FacesUtil.getInstance().getLabelKey("usuario.tipo.A")));
 		}
 		return tiposUsuario;
+	}
+	
+	public Map<String, String> getTiposUsuarioMap() {
+		if (tiposUsuarioMap.isEmpty()) {
+			tiposUsuarioMap.put(Usuario.TIPO_USUARIO, FacesUtil.getInstance().getLabelKey("usuario.tipo.U"));
+			tiposUsuarioMap.put(Usuario.TIPO_SUPERVISOR, FacesUtil.getInstance().getLabelKey("usuario.tipo.S"));
+			tiposUsuarioMap.put(Usuario.TIPO_ADMINISTRADOR, FacesUtil.getInstance().getLabelKey("usuario.tipo.A"));
+		}
+		return tiposUsuarioMap;
 	}
 
 	/**
@@ -69,6 +82,8 @@ public class ComboController implements Serializable {
 	
 	private List<SelectItem> simNao = new ArrayList<>();
 
+	private Map<String, String> simNaoMap = new WeakHashMap<>();
+	
 	/**
 	 * @return the tiposUsuario
 	 */
@@ -78,6 +93,14 @@ public class ComboController implements Serializable {
 			simNao.add(new SelectItem(Usuario.ATIVO_NAO, FacesUtil.getInstance().getLabelKey(Usuario.ATIVO_NAO)));
 		}
 		return simNao;
+	}
+	
+	public Map<String, String> getSimNaoMap() {
+		if (simNaoMap.isEmpty()) {
+			simNaoMap.put(Usuario.ATIVO_SIM, FacesUtil.getInstance().getLabelKey(Usuario.ATIVO_SIM));
+			simNaoMap.put(Usuario.ATIVO_NAO, FacesUtil.getInstance().getLabelKey(Usuario.ATIVO_NAO));
+		}
+		return simNaoMap;
 	}
 
 	/**

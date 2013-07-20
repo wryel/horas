@@ -57,12 +57,10 @@
 							<f:facet name="header">
 								<h:outputText value="#{msg['deletar']}" />
 							</f:facet>
-					
 							<a4j:commandLink render="confirmarDelecao" oncomplete="#{rich:component('confirmarDelecao')}.show()">
 								<f:setPropertyActionListener target="#{clienteController.bean}" value="#{cliente}" />
 								<h:graphicImage url="/resources/imagem/deletar.png" width="16" height="16" />								
 							</a4j:commandLink>	
-											
 						</rich:column>
 						
 						<rich:column styleClass="alinharCentro">

@@ -6,7 +6,8 @@
 	xmlns:rich="http://richfaces.org/rich" 
 	xmlns:ui="http://java.sun.com/jsf/facelets" 
 	xmlns:a4j="http://richfaces.org/a4j" 
-	xmlns:t="http://myfaces.apache.org/tomahawk">
+	xmlns:t="http://myfaces.apache.org/tomahawk" 
+	xmlns:custom="http://java.sun.com/jsf/composite/custom">
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="body">		
 			<rich:panel>
@@ -17,8 +18,24 @@
 				<rich:panel>
 					<h:form>
 						<t:panelGrid columns="2" styleClass="cemPorCento" columnClasses="colunaLabel">
-							<h:outputLabel value="#{msg['cliente.nome']}:" styleClass="negrito" />
-							<h:inputText value="#{clienteController.filter.nomeLikeRight}" />
+							<h:outputLabel value="#{msg['usuario.nome']}:" styleClass="negrito" />
+							<h:inputText value="#{usuarioController.filter.nomeLikeRight}" styleClass="inputTexto" />
+							
+							<h:outputLabel value="#{msg['usuario.email']}:" styleClass="negrito" />
+							<h:inputText value="#{usuarioController.filter.emailLikeRight}" styleClass="inputTexto" />
+							
+							<h:outputText value="#{msg['usuario.ativo']}:" styleClass="negrito" />
+							<h:selectOneMenu value="#{usuarioController.filter.ativoEquals}" styleClass="inputTexto">
+								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
+								<f:selectItems value="#{comboController.simNao}" />
+							</h:selectOneMenu>
+							
+							<h:outputText value="#{msg['usuario.tipo']}:" styleClass="negrito" />
+							<h:selectOneMenu value="#{usuarioController.filter.tipoEquals}" styleClass="inputTexto">
+								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
+								<f:selectItems value="#{comboController.tiposUsuario}" />
+							</h:selectOneMenu>
+							
 							<t:panelGroup styleClass="alinharDireita linhaBotoes" colspan="2">
 								<h:commandButton value="#{msg['adicionar']}" action="#{usuarioController.adicionar}" />
 								<h:commandButton value="#{msg['pesquisar']}" action="#{usuarioController.pesquisar}" />
@@ -31,26 +48,14 @@
 					
 				<h:form>
 				
-					<rich:popupPanel id="confirmarDelecao" domElementAttachment="form" resizeable="false">
-						<f:facet name="header">
-							<h:outputText value="#{msg['confirme']}" />
-						</f:facet>
-						<f:facet name="controls">
-				            <h:outputLink value="#" onclick="#{rich:component('confirmarDelecao')}.hide(); return false;">
-				                <h:outputText value="X" />
-				            </h:outputLink>
-				        </f:facet>
+					<custom:popupAction popupId="confirmarDelecao" actionConfirm="#{usuarioController.deletar()}">
 						<h:outputFormat value="#{msg['usuario.confirmarDelecao']}">
-							<f:param value="#{usuarioController.bean.login}" />
+							<f:param value="#{usuarioController.bean.email}" />
 						</h:outputFormat>
-						<h:panelGrid columns="2" styleClass="cemPorCento">
-							<h:commandButton value="#{msg['cancelar']}" type="button" onclick="#{rich:component('confirmarDelecao')}.hide();" />
-							<h:commandButton action="#{usuarioController.deletar}" value="#{msg['deletar']}" />
-						</h:panelGrid>
-					</rich:popupPanel>					
+					</custom:popupAction>
 				
 					<rich:dataTable value="#{usuarioController.list}" var="usuario" styleClass="cemPorCento">
-						<rich:column>
+						<rich:column styleClass="negrito alinharCentro">
 							<f:facet name="header">
 								<h:outputText value="#{msg['usuario.id']}" />
 							</f:facet>
@@ -69,6 +74,20 @@
 								<h:outputText value="#{msg['usuario.email']}" />
 							</f:facet>
 							<h:outputText value="#{usuario.email}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['usuario.ativo']}" />
+							</f:facet>
+							<h:outputText value="#{comboController.simNaoMap[usuario.ativo]}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{msg['usuario.tipo']}" />
+							</f:facet>
+							<h:outputText value="#{comboController.tiposUsuarioMap[usuario.tipo]}" />
 						</rich:column>
 						
 						<rich:column styleClass="alinharCentro">

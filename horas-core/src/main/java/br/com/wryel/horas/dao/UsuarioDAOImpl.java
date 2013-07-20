@@ -28,10 +28,24 @@ public class UsuarioDAOImpl extends DAOImpl<Usuario, Integer, UsuarioFilter> imp
 		
 		List<String> wheres = new ArrayList<>();
 		
-		if (StringUtils.isNotBlank(filter.getEmailEquals())) {
-			
-			wheres.add("u.email = :emailEquals");
-			
+		if (StringUtils.isNotBlank(filter.getEmailEquals())) {	
+			wheres.add("u.email = :emailEquals");			
+		}
+		
+		if (StringUtils.isNotBlank(filter.getEmailLikeRight())) {
+			wheres.add("u.email LIKE :emailLikeRight");
+		}
+		
+		if (StringUtils.isNotBlank(filter.getNomeLikeRight())) {
+			wheres.add("u.nome LIKE :nomeLikeRight");
+		}
+		
+		if (StringUtils.isNotEmpty(filter.getAtivoEquals())) {
+			wheres.add("u.ativo = :ativoEquals");
+		}
+		
+		if (StringUtils.isNotEmpty(filter.getTipoEquals())) {
+			wheres.add("u.tipo = :tipoEquals");
 		}
 		
 		if (CollectionUtils.isNotEmpty(wheres)) {
@@ -48,10 +62,23 @@ public class UsuarioDAOImpl extends DAOImpl<Usuario, Integer, UsuarioFilter> imp
 		super.applyFilter(query, filter);
 		
 		if (StringUtils.isNotBlank(filter.getEmailEquals())) {
-			
 			query.setParameter("emailEquals", filter.getEmailEquals().trim());
-			
 		}
 		
+		if (StringUtils.isNotBlank(filter.getEmailLikeRight())) {
+			query.setParameter("emailLikeRight", filter.getEmailLikeRight().trim() + "%");
+		}
+		
+		if (StringUtils.isNotBlank(filter.getNomeLikeRight())) {
+			query.setParameter("nomeLikeRight", filter.getNomeLikeRight().trim() + "%");
+		}
+		
+		if (StringUtils.isNotEmpty(filter.getAtivoEquals())) {
+			query.setParameter("ativoEquals", filter.getAtivoEquals());
+		}
+		
+		if (StringUtils.isNotEmpty(filter.getTipoEquals())) {
+			query.setParameter("tipoEquals", filter.getTipoEquals());
+		}
 	}
 }

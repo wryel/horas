@@ -18,24 +18,26 @@
 						<t:panelGrid columns="2" columnClasses="colunaLabel" styleClass="cemPorCento">
 							
 							<h:outputText value="#{msg['usuario.nome']}:" styleClass="negrito" />
-							<h:inputText value="#{usuarioController.bean.nome}"  />
+							<h:inputText value="#{usuarioController.bean.nome}" styleClass="inputTexto" />
 							
 							<h:outputText value="#{msg['usuario.sobrenome']}:" styleClass="negrito" />
-							<h:inputText value="#{usuarioController.bean.sobrenome}" />
+							<h:inputText value="#{usuarioController.bean.sobrenome}" styleClass="inputTexto" />
 
 							<h:outputText value="#{msg['usuario.email']}:" styleClass="negrito" />
-							<h:inputText value="#{usuarioController.bean.email}" />
+							<h:inputText value="#{usuarioController.bean.email}" styleClass="inputTexto" />
 
 							<h:outputText value="#{msg['usuario.senha']}:" styleClass="negrito" />
-							<h:inputText value="#{usuarioController.bean.senha}" /> 
+							<h:inputText value="#{usuarioController.bean.senha}" styleClass="inputTexto" /> 
 							
 							<h:outputText value="#{msg['usuario.ativo']}:" styleClass="negrito" />
-							<h:selectOneRadio value="#{usuarioController.bean.ativo}">
+							<h:selectOneMenu value="#{usuarioController.bean.ativo}" styleClass="inputTexto">
+								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
 								<f:selectItems value="#{comboController.simNao}" />
-							</h:selectOneRadio>
+							</h:selectOneMenu>
 							
 							<h:outputText value="#{msg['usuario.tipo']}:" styleClass="negrito" />
-							<h:selectOneMenu value="#{usuarioController.bean.tipo}">
+							<h:selectOneMenu value="#{usuarioController.bean.tipo}" styleClass="inputTexto">
+								<f:selectItem itemLabel="#{msg['opcaoVazia']}" />
 								<f:selectItems value="#{comboController.tiposUsuario}" />
 							</h:selectOneMenu>
 							

@@ -112,6 +112,6 @@ public class UsuarioController extends AbstractController<Usuario> {
 			return nav(entrada());
 		}
 		
-		return listagem();
+		return nav(listagem());
 	}
 }
