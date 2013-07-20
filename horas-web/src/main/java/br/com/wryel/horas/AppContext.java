@@ -8,6 +8,7 @@ public final class AppContext {
 	
 	public static final String ADICIONAR = "adicionar";
 	
+	public static final String JSF_EXTENSION = "faces";
 	
 	public interface Session {
 		

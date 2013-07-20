@@ -112,4 +112,23 @@ public class UsuarioBusinessImpl extends BusinessImpl<Usuario, Integer, UsuarioF
 	public void setDAO(UsuarioDAO entityDAO) {
 		super.dao = entityDAO;
 	}
+
+	@Override
+	public Usuario login(String email, String senha) {
+		
+		UsuarioFilter usuarioFilter = new UsuarioFilter();
+		
+		usuarioFilter.setEmailEquals(email);
+		usuarioFilter.setSenhaEquals(senha);
+		
+		List<Usuario> usuarios = dao.list(usuarioFilter);
+		
+		Usuario usuario = null;
+		
+		if (CollectionUtils.isNotEmpty(usuarios)) {
+			usuario = usuarios.get(0);
+		}
+		
+		return usuario;
+	}
 }

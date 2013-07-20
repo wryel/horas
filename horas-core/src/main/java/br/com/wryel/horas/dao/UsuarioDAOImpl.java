@@ -48,6 +48,10 @@ public class UsuarioDAOImpl extends DAOImpl<Usuario, Integer, UsuarioFilter> imp
 			wheres.add("u.tipo = :tipoEquals");
 		}
 		
+		if (StringUtils.isNotEmpty(filter.getTipoEquals())) {
+			wheres.add("u.senha = :senhaEquals");
+		}
+		
 		if (CollectionUtils.isNotEmpty(wheres)) {
 			sql.append(" WHERE ");
 			sql.append(StringUtils.join(wheres, " AND "));
@@ -79,6 +83,10 @@ public class UsuarioDAOImpl extends DAOImpl<Usuario, Integer, UsuarioFilter> imp
 		
 		if (StringUtils.isNotEmpty(filter.getTipoEquals())) {
 			query.setParameter("tipoEquals", filter.getTipoEquals());
+		}
+		
+		if (StringUtils.isNotEmpty(filter.getTipoEquals())) {
+			query.setParameter("senhaEquals", filter.getSenhaEquals());
 		}
 	}
 }

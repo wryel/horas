@@ -8,4 +8,5 @@ import br.com.wryel.horas.entity.filter.UsuarioFilter;
 @Local
 public interface UsuarioBusiness extends Business<Usuario, Integer, UsuarioFilter> {
 	
+	public Usuario login(String email, String senha);
 }

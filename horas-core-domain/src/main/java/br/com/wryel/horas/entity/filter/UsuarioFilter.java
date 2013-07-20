@@ -19,6 +19,8 @@ public class UsuarioFilter extends EntityFilter<Usuario> {
 	
 	private String tipoEquals;
 	
+	private String senhaEquals;
+	
 	/**
 	 * @return the emailEquals
 	 */
@@ -87,5 +89,19 @@ public class UsuarioFilter extends EntityFilter<Usuario> {
 	 */
 	public void setTipoEquals(String tipoEquals) {
 		this.tipoEquals = tipoEquals;
+	}
+
+	/**
+	 * @return the senhaEquals
+	 */
+	public String getSenhaEquals() {
+		return senhaEquals;
+	}
+
+	/**
+	 * @param senhaEquals the senhaEquals to set
+	 */
+	public void setSenhaEquals(String senhaEquals) {
+		this.senhaEquals = senhaEquals;
 	}
 }
