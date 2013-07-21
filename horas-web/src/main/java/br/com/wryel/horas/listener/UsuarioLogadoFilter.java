@@ -29,6 +29,7 @@ public class UsuarioLogadoFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 		Usuario usuario = SessionUtil.getInstance().getUsuarioLogado();
+		
 		if (usuario == null) {
 			HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
 			HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
