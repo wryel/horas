@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ejb-jar 
-	version="3.0"
-    xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<ejb-jar
+	version="3.1"
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-						http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd">
+						http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd">
 	<enterprise-beans>
 	    <session>
 	        <ejb-name>UsuarioBusinessImpl</ejb-name>
@@ -16,9 +17,9 @@
 				<env-entry-name>email.corpo.template</env-entry-name>
 				<env-entry-type>java.lang.String</env-entry-type>
 				<env-entry-value>
-					Ola {0}, 
+					Olá {0}, 
 					
-					seu usuario foi criado. Sua senha de acesso é: {1}
+					seu usuário foi criado. Sua senha de acesso é: {1}
 				</env-entry-value>
 			</env-entry>
 	    </session>

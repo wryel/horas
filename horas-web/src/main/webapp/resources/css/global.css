@@ -39,3 +39,8 @@ img {
 .linhaBotoes input[type="submit"] {
 	margin-right: 5px;
 }
+
+.bandeira {
+	margin-right: 5px;
+	border: 0px;
+}

@@ -1,4 +1,4 @@
-package br.com.wryel.horas.controller;
+package br.com.wryel.horas.controller.pub;
 
 import java.io.Serializable;
 import java.util.ArrayList;

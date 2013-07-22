@@ -3,6 +3,8 @@ package br.com.wryel.horas.controller;
 public final class Navegacao {
 	
 	public static final String ATUAL = "";
+	
+	public static final String LOGIN = "/login";
 		
 	public interface Cliente {
 			
@@ -42,6 +44,8 @@ public final class Navegacao {
 		public String LISTAGEM = "/view/usuario/listagem";
 		
 		public String ENTRADA = "/view/usuario/entrada";
+		
+		public String CADASTRO_PUBLICO = "/cadastro";
 	}
 	
 	private Navegacao() {

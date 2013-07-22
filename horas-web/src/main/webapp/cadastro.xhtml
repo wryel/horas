@@ -34,15 +34,26 @@
 					</h:panelGrid>
 				</f:facet>
 				<t:panelGrid columns="2" columnClasses="colunaLabel" styleClass="cemPorCento">
-					<h:outputLabel value="#{msg['usuario.email']}:" styleClass="negrito"  />
-					<h:inputText value="#{loginController.usuario.email}" styleClass="inputTexto" />
+					<h:outputText value="#{msg['usuario.nome']}:" styleClass="negrito" />
+					<h:inputText value="#{cadastroUsuarioController.bean.nome}" styleClass="inputTexto" />
 					
-					<h:outputLabel value="#{msg['usuario.senha']}:" styleClass="negrito" />
-					<h:inputSecret value="#{loginController.usuario.senha}" styleClass="inputTexto" />
+					<h:outputText value="#{msg['usuario.sobrenome']}:" styleClass="negrito" />
+					<h:inputText value="#{cadastroUsuarioController.bean.sobrenome}" styleClass="inputTexto" />
+
+					<h:outputText value="#{msg['usuario.senha']}:" styleClass="negrito" />
+					<h:inputText value="#{cadastroUsuarioController.bean.senha}" styleClass="inputTexto" /> 
 					
-					<t:panelGroup styleClass="alinharDireita linhaBotoes" colspan="2">
-						<h:commandLink value="#{msg['login.cadastro']}" action="#{cadastroUsuarioController.cadastro}" /> 
-						<h:commandButton value="#{msg['login.logar']}" action="#{loginController.login}" />
+					<h:outputText value="#{msg['cadastroUsuario.confirmaSenha']}:" styleClass="negrito" />
+					<h:inputText value="#{cadastroUsuarioController.bean.confirmaSenha}" styleClass="inputTexto" /> 
+					
+					<h:outputText value="#{msg['usuario.email']}:" styleClass="negrito" />
+					<h:inputText value="#{cadastroUsuarioController.bean.email}" styleClass="inputTexto" />
+					
+					<h:outputText value="#{msg['cadastroUsuario.confirmaEmail']}:" styleClass="negrito" />
+					<h:inputText value="#{cadastroUsuarioController.bean.confirmaEmail}" styleClass="inputTexto" />
+					
+					<t:panelGroup colspan="2" styleClass="alinharDireita linhaBotoes">
+						<h:commandButton action="#{cadastroUsuarioController.cadastrar}" value="#{msg['login.cadastro']}" />
 					</t:panelGroup>
 				</t:panelGrid>
 			</rich:panel>

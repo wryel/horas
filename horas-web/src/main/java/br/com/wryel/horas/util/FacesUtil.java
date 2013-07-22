@@ -5,12 +5,14 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
@@ -58,6 +60,15 @@ public final class FacesUtil {
 		FacesMessage facesMessage = new FacesMessage(error);
 		facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 		getFacesContext().addMessage(null, facesMessage);
+	}
+	
+	public HttpServletRequest getRequest() {
+		FacesContext facesContext = getFacesContext();
+		return (HttpServletRequest) facesContext.getExternalContext().getRequest();
+	}
+	
+	public Locale getDefaultApplicationLocale() {
+		return getFacesContext().getApplication().getDefaultLocale();
 	}
 	
 	public HttpSession getSession() {
@@ -114,5 +125,10 @@ public final class FacesUtil {
 			}
 		}
 		return selectItems;
+	}
+	
+	public void setCurrentLocale(Locale locale) {
+		FacesContext facesContext = getFacesContext();
+		facesContext.getViewRoot().setLocale(locale);
 	}
 }

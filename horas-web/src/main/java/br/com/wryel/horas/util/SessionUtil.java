@@ -1,5 +1,7 @@
 package br.com.wryel.horas.util;
 
+import javax.servlet.http.HttpSession;
+
 import br.com.wryel.horas.AppContext;
 import br.com.wryel.horas.entity.Usuario;
 
@@ -12,8 +14,13 @@ public final class SessionUtil {
 	}
 	
 	public Usuario getUsuarioLogado() {
-		Usuario usuario = (Usuario) (FacesUtil.getInstance().getSession().getAttribute(AppContext.Session.USUARIO) == null ? new Usuario(1) : FacesUtil.getInstance().getSession().getAttribute(AppContext.Session.USUARIO));
+		Usuario usuario = (Usuario) FacesUtil.getInstance().getSession().getAttribute(AppContext.Session.USUARIO);
 		return usuario;
+	}
+	
+	public void setUsuarioLogado(Usuario usuario) {
+		HttpSession httpSession = FacesUtil.getInstance().getSession();
+		httpSession.setAttribute(AppContext.Session.USUARIO, usuario);
 	}
 	
 	public void destruirSessaoAtual() {

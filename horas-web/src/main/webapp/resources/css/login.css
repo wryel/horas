@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+
+#painelCentralizado {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -200px;
+	margin-top: -75px;
+}

@@ -4,7 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:ui="http://java.sun.com/jsf/facelets" 
 	xmlns:rich="http://richfaces.org/rich"
-	xmlns:a4j="http://richfaces.org/a4j">
+	xmlns:a4j="http://richfaces.org/a4j" 
+	xmlns:f="http://java.sun.com/jsf/core">
 	<h:head>
 		<ui:insert name="css" />
 		<ui:insert name="javascript" />
@@ -12,8 +13,30 @@
 		<h:outputStylesheet library="css" name="global.css" />
 	</h:head>
 	<h:body>
+		<f:event listener="#{i18nController.eventoSetarLocaleAtualNaRequest}" type="preRenderView" />
 		<ui:insert name="metadata" />
 		<table width="100%" border="0" style="min-width: 1003px;">
+			<tr>
+				<td colspan="2" align="right">
+					<rich:panel>
+						<h:form>
+							<h:commandLink actionListener="#{i18nController.eventoMudarIdioma}">
+								<f:attribute name="idioma" value="pt" />
+								<h:graphicImage url="/resources/imagem/portugues.png" styleClass="bandeira" />	
+							</h:commandLink>
+							<h:commandLink actionListener="#{i18nController.eventoMudarIdioma}">
+								<f:attribute name="idioma" value="en" />
+								<h:graphicImage url="/resources/imagem/english.png" styleClass="bandeira" />
+							</h:commandLink>
+							<h:outputFormat value="#{msg['login.mensagemUsuarioLogado']} " rendered="#{sessionScope.usuario != null}">
+								<f:param value="#{sessionScope.usuario.nome}" />
+								<f:param value="#{sessionScope.usuario.email}" />
+							</h:outputFormat>
+							<h:commandLink value="#{msg['login.deslogar']}" action="#{loginController.logout}" />
+						</h:form>
+					</rich:panel>
+				</td>
+			</tr>
 			<tr>
 				<td style="width: 160px;" valign="top" align="center">
 					<ui:include src="/view/template/menu.xhtml" />

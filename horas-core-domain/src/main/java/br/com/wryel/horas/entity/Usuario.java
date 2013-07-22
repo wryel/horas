@@ -1,12 +1,15 @@
 package br.com.wryel.horas.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 @Entity
@@ -44,6 +47,10 @@ public class Usuario implements Serializable {
 	private String ativo;
 	
 	private String tipo;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_de_cadastro")
+	private Date dataDeCadastro;
 	
 	public Usuario() {
 		
@@ -119,6 +126,20 @@ public class Usuario implements Serializable {
 	 */
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	/**
+	 * @return the dataDeCadastro
+	 */
+	public Date getDataDeCadastro() {
+		return dataDeCadastro;
+	}
+
+	/**
+	 * @param dataDeCadastro the dataDeCadastro to set
+	 */
+	public void setDataDeCadastro(Date dataDeCadastro) {
+		this.dataDeCadastro = dataDeCadastro;
 	}
 
 	/* (non-Javadoc)
