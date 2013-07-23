@@ -12,6 +12,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.ColumnTransformer;
+
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(
 	columnNames = "email", 
@@ -36,6 +38,7 @@ public class Usuario implements Serializable {
 	@Column(name = "id_usuario", columnDefinition = "INTEGER UNSIGNED")
 	private Integer id;
 	
+	@ColumnTransformer(read = "DECODE(senha, 'WRYEL')", write = "ENCODE(?, 'WRYEL')")
 	private String senha;
 	
 	private String email;

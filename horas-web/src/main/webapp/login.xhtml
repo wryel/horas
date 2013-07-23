@@ -19,9 +19,9 @@
 		
 			<rich:panel id="painelCentralizado">
 				<f:facet name="header">
-					<h:panelGrid columns="2" styleClass="cemPorCento">
+					<t:panelGrid columns="2" styleClass="cemPorCento">
 						<h:outputText value="#{msg['login.logar']}" />
-						<h:panelGroup>
+						<t:panelGroup styleClass="alinharDireita linhaBotoes">
 							<h:commandLink actionListener="#{i18nController.eventoMudarIdioma}">
 								<f:attribute name="idioma" value="pt" />
 								<h:graphicImage url="/resources/imagem/portugues.png" styleClass="bandeira" />	
@@ -30,8 +30,8 @@
 								<f:attribute name="idioma" value="en" />
 								<h:graphicImage url="/resources/imagem/english.png" styleClass="bandeira" />
 							</h:commandLink>
-						</h:panelGroup>
-					</h:panelGrid>
+						</t:panelGroup>
+					</t:panelGrid>
 				</f:facet>
 				<t:panelGrid columns="2" columnClasses="colunaLabel" styleClass="cemPorCento">
 					<h:outputLabel value="#{msg['usuario.email']}:" styleClass="negrito"  />
@@ -40,8 +40,8 @@
 					<h:outputLabel value="#{msg['usuario.senha']}:" styleClass="negrito" />
 					<h:inputSecret value="#{loginController.usuario.senha}" styleClass="inputTexto" />
 					
-					<t:panelGroup styleClass="alinharDireita linhaBotoes" colspan="2">
-						<h:commandLink value="#{msg['login.cadastro']}" action="#{cadastroUsuarioController.cadastro}" /> 
+					<h:commandLink value="#{msg['login.cadastro']}" action="#{cadastroUsuarioController.cadastro}" /> 
+					<t:panelGroup styleClass="alinharDireita linhaBotoes" colspan="1">
 						<h:commandButton value="#{msg['login.logar']}" action="#{loginController.login}" />
 					</t:panelGroup>
 				</t:panelGrid>
