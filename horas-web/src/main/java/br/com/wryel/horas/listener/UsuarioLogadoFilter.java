@@ -36,18 +36,18 @@ public class UsuarioLogadoFilter implements Filter {
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 		HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
 		HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
-		Usuario usuario = (Usuario) httpServletRequest.getSession().getAttribute(AppContext.Session.USUARIO);
-		if (!httpServletRequest.getRequestURI().contains(ResourceHandler.RESOURCE_IDENTIFIER) && 
-				!httpServletRequest.getRequestURI().contains(ResourceHandlerImpl.RICHFACES_RESOURCE_IDENTIFIER)) {
-			if (usuario == null && httpServletRequest.getRequestURI().endsWith(SIGNUP_PAGE)) {
-				
-			} else if (usuario == null && !httpServletRequest.getRequestURI().endsWith(LOGIN_PAGE)) {
+		if (!httpServletRequest.getRequestURL().toString().contains(ResourceHandler.RESOURCE_IDENTIFIER) && 
+				!httpServletRequest.getRequestURL().toString().contains(ResourceHandlerImpl.RICHFACES_RESOURCE_IDENTIFIER)) {
+			Usuario usuario = (Usuario) httpServletRequest.getSession().getAttribute(AppContext.Session.USUARIO);
+			if (usuario == null && httpServletRequest.getRequestURI().contains(SIGNUP_PAGE)) {
+				filterChain.doFilter(servletRequest, servletResponse);
+			} else if (usuario == null && !(httpServletRequest.getRequestURI().contains(LOGIN_PAGE))) {
 				httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/" + LOGIN_PAGE);
-			} else if (usuario != null && httpServletRequest.getRequestURI().endsWith(LOGIN_PAGE)) {
+			} else if (usuario != null && httpServletRequest.getRequestURI().contains(LOGIN_PAGE)) {
 				httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/" + INDEX_PAGE);
 			}			
 		}
-		filterChain.doFilter(servletRequest, servletResponse);
+		filterChain.doFilter(servletRequest, servletResponse);			
 	}
 
 	@Override

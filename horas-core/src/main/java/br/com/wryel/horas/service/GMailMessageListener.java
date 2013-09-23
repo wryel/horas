@@ -39,12 +39,14 @@ public class GMailMessageListener implements MessageListener {
 	@Override
 	public void onMessage(Message message) {
 		ObjectMessage objectMessage = (ObjectMessage) message;
-		try {		
-			Email email = (Email) objectMessage.getObject();
-			enviar(email);			
-		} catch (JMSException | MessagingException e) {
-			throw new HorasRuntimeException("Ocorreu um erro ao tentar processar envio de e-mail" + e.getMessage(), e);
-		}
+			try {		
+				if (objectMessage.getObject() instanceof Email) {
+					Email email = (Email) objectMessage.getObject();
+					enviar(email);			
+				}
+			} catch (JMSException | MessagingException e) {
+				throw new HorasRuntimeException("Ocorreu um erro ao tentar processar envio de e-mail" + e.getMessage(), e);
+			}			
 	}
 	
 	private void enviar(Email email) throws MessagingException {

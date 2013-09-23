@@ -35,6 +35,11 @@
 	    <param-name>org.richfaces.skin</param-name>
 	    <param-value>horas</param-value>
 	</context-param>
+
+	<session-config>
+		<session-timeout>20</session-timeout>
+		<tracking-mode>URL</tracking-mode>
+	</session-config>
 	
 	<!-- Map these files with JSF -->
 	<servlet-mapping>

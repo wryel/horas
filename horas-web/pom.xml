@@ -76,6 +76,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.3</version>
 				<configuration>
+					<warName>horas-web</warName>
 				  	<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>

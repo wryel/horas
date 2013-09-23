@@ -17,6 +17,7 @@ public final class ServiceLocator {
 	public <EJB extends Business<?, ?, ?>> EJB lookup(Class<EJB> ejbInterface) {
 		Context context = getContext();
 		try {
+			// TESTADO NO JBOSS 7.1
 			Object lookup = context.lookup("java:global/horas-ear/horas-core-0.0.1-SNAPSHOT/" + ejbInterface.getSimpleName() + "Impl");
 			EJB ejb = ejbInterface.cast(lookup);
 			return ejb;

@@ -56,6 +56,7 @@
 				<configuration>
 				    <defaultLibBundleDir></defaultLibBundleDir>
 				    <version>6</version>
+				    <finalName>horas-ear</finalName>
 					<modules>
 						<webModule>
 							<groupId>br.com.wryel</groupId>
