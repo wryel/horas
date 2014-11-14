@@ -3,7 +3,7 @@ horas
 
 Sistema WEB para controle de horas. 
 
-- Não levar a forma de iteração entre view/controller a sério, apesar de funcional, o projeto era apenas para constatar na prática os contras do uso excessivo de @ViewScope no que diz 1 entidade x 1 controller.
+- Não levar a sério a forma de iteração entre view/controlle. Apesar de funcional o projeto, era apenas para constatar na prática os contras do uso excessivo de @ViewScope no que diz 1 entidade x 1 controller.
 
 Principais tópicos utilizados:
 
