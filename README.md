@@ -4,6 +4,7 @@ horas
 Sistema WEB para controle de horas. 
 
 - Não levar a sério a forma de iteração entre view/controller. Apesar de funcional o projeto, era apenas para constatar na prática os contras do uso excessivo de @ViewScope no que diz respeito à 1 entidade x 1 controller.
+- Extenso uso de FlashScope para passagem de atributos entre views.
 
 Principais tópicos utilizados:
 
